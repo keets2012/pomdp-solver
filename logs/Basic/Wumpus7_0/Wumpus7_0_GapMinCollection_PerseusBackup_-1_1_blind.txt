@@ -1,0 +1,50 @@
+Model:Wumpus7_0
+Collection Algorithm:GapMinCollection
+Backup Ordering Algorithm:PerseusBackup
+# of Independent Trials: 50
+# of Beliefs Collected Per Step: 100
+# of Backup Iterations Per Step: 1
+Output File: Wumpus7_0_GapMinCollection_PerseusBackup_-1_1_blind.txt
+POMDPExperiment:main:Checking memory after GC, memory:  total 16 free 16 max 259
+Started loading model Models/Wumpus7_0.POMDP
+|S| = 1568|A| = 4|O| = 2
+........Done loading model
+
+max is 10.0 min is -100.0
+POMDP is Wumpus7_0
+#Steps per trials = 162
+Init value function to min
+Min R value = -100.0 init value = -1999.9999999999982
+Begin blind policy computation  4 actions
+.............Done action 0 after 136 iterations |V| = 1
+.............Done action 1 after 136 iterations |V| = 2
+.............Done action 2 after 136 iterations |V| = 3
+.............Done action 3 after 136 iterations |V| = 4
+Done blind policy
+Starting MDP value iteration
+MDPVI:ComputeV:Starting to compute value function, memory:  total 162 free 60 max 259
+MDPVI:ComputeV:Start iteration 0, memory:  total 162 free 60 max 259
+MDPVF:computeValueFunction:After 0 iterations, delta = 9.5 min 1 = 0.0 max 41 = 10.0, memory:  total 162 free 59 max 259
+MDPVI:ComputeV:Start iteration 1, memory:  total 162 free 59 max 259
+MDPVF:computeValueFunction:After 1 iterations, delta = 9.025 min 1 = 0.0 max 41 = 10.0, memory:  total 162 free 59 max 259
+MDPVI:ComputeV:Start iteration 2, memory:  total 162 free 59 max 259
+MDPVF:computeValueFunction:After 2 iterations, delta = 8.57374963760376 min 1 = 0.0 max 41 = 10.0, memory:  total 162 free 59 max 259
+MDPVI:ComputeV:Start iteration 3, memory:  total 162 free 59 max 259
+MDPVF:computeValueFunction:After 3 iterations, delta = 8.145062065124511 min 1 = 0.0 max 41 = 10.0, memory:  total 162 free 59 max 259
+MDPVI:ComputeV:Start iteration 4, memory:  total 162 free 59 max 259
+MDPVF:computeValueFunction:After 4 iterations, delta = 7.737809324264526 min 1 = 0.0 max 41 = 10.0, memory:  total 162 free 58 max 259
+MDPVI:ComputeV:Start iteration 5, memory:  total 162 free 58 max 259
+MDPVF:computeValueFunction:After 5 iterations, delta = 7.350918722152709 min 1 = 0.0 max 41 = 10.0, memory:  total 162 free 58 max 259
+MDPVI:ComputeV:Start iteration 6, memory:  total 162 free 58 max 259
+MDPVF:computeValueFunction:After 6 iterations, delta = 6.983372831344604 min 1 = 0.0 max 41 = 10.0, memory:  total 162 free 58 max 259
+MDPVI:ComputeV:Start iteration 7, memory:  total 162 free 58 max 259
+MDPVF:computeValueFunction:After 7 iterations, delta = 6.634204053878784 min 1 = 0.0 max 41 = 10.0, memory:  total 162 free 58 max 259
+MDPVI:ComputeV:Start iteration 8, memory:  total 162 free 58 max 259
+MDPVF:computeValueFunction:After 8 iterations, delta = 6.302493715286254 min 1 = 0.0 max 41 = 10.0, memory:  total 162 free 57 max 259
+MDPVI:ComputeV:Start iteration 9, memory:  total 162 free 57 max 259
+MDPVF:computeValueFunction:After 9 iterations, delta = 5.987368893623351 min 48 = 0.0 max 41 = 10.0, memory:  total 162 free 57 max 259
+MDPVI:ComputeV:Start iteration 10, memory:  total 162 free 57 max 259
+MDPVF:computeValueFunction:After 10 iterations, delta = 5.688000607490539 min 48 = 0.0 max 41 = 10.0, memory:  total 162 free 57 max 259
+MDPVI:ComputeV:Start iteration 11, memory:  total 162 free 57 max 259
+MDPVF:computeValueFunction:After 11 iterations, delta = 3.8146972691777137E-7 min 48 = 0.0 max 41 = 10.0, memory:  total 162 free 57 max 259
+MDPVF:VI:MDP value iteration done - iterations 0 delta 3.8146972691777137E-7, memory:  total 162 free 57 max 259

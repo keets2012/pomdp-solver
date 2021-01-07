@@ -1,0 +1,9 @@
+Started loading model Models/Wumpus7_0.POMDP
+|S| = 1568|A| = 4|O| = 2
+........Done loading model
+
+max is 10.0 min is -100.0
+0.03125
+0Avg. steps per trial 100
+
+POMDP:computeAverageDiscountedReward:After 2 tests. ADR -220.481, stdev 74.92317 SE 105.95737 time 0

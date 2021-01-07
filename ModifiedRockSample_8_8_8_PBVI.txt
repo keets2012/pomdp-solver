@@ -1,0 +1,39 @@
+#Steps per trials = 162
+Init value function to min
+Min R value = 0.0 init value = 0.0
+Begin blind policy computation  13 actions
+Done action 0 after 1 iterations |V| = 1
+Done action 1 after 1 iterations |V| = 1
+Done action 2 after 1 iterations |V| = 1
+Done action 3 after 1 iterations |V| = 1
+Done action 4 after 1 iterations |V| = 1
+Done action 5 after 1 iterations |V| = 1
+Done action 6 after 1 iterations |V| = 1
+Done action 7 after 1 iterations |V| = 1
+Done action 8 after 1 iterations |V| = 1
+Done action 9 after 1 iterations |V| = 1
+Done action 10 after 1 iterations |V| = 1
+Done action 11 after 1 iterations |V| = 1
+.........Done action 12 after 91 iterations |V| = 1
+Done blind policy
+Begin PBVI
+Max delta over null from 0.0 to 0.0
+Value function did not change - iteration 0 complete
+Expanding belief space
+Expanded belief space - |B| = 101
+Max delta over null from 0.0 to 0.0
+Value function did not change - iteration 1 complete
+Expanding belief space
+Expanded belief space - |B| = 201
+Max delta over null from 0.0 to 0.0
+Value function did not change - iteration 2 complete
+Expanding belief space
+Expanded belief space - |B| = 301
+Max delta over null from 0.0 to 0.0
+Value function did not change - iteration 3 complete
+Expanding belief space
+Expanded belief space - |B| = 401
+Max delta over null from 0.0 to 0.0
+Value function did not change - iteration 4 complete
+Expanding belief space
+Expanded belief space - |B| = 501

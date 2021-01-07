@@ -1,0 +1,71 @@
+#Steps per trials = 162
+Init value function to min
+Min R value = 0.0 init value = 0.0
+Begin blind policy computation  10 actions
+Done action 0 after 6 iterations |V| = 1
+Done action 1 after 6 iterations |V| = 1
+Done action 2 after 6 iterations |V| = 1
+Done action 3 after 6 iterations |V| = 1
+Done action 4 after 1 iterations |V| = 1
+Done action 5 after 1 iterations |V| = 1
+Done action 6 after 1 iterations |V| = 1
+Done action 7 after 1 iterations |V| = 1
+Done action 8 after 1 iterations |V| = 1
+.........Done action 9 after 91 iterations |V| = 1
+Done blind policy
+Starting MDP value iteration
+MDPVI:ComputeV:Starting to compute value function, memory:  total 139 free 66 max 907
+MDPVI:ComputeV:Start iteration 0, memory:  total 139 free 66 max 907
+MDPVF:computeValueFunction:After 0 iterations, delta = 18.073749637603758 min 1 = 0.0 max 673 = 19.5, memory:  total 139 free 66 max 907
+MDPVI:ComputeV:Start iteration 1, memory:  total 139 free 66 max 907
+MDPVF:computeValueFunction:After 1 iterations, delta = 9.025 min 1 = 0.0 max 468 = 26.311559677124023, memory:  total 139 free 65 max 907
+MDPVI:ComputeV:Start iteration 2, memory:  total 139 free 65 max 907
+MDPVF:computeValueFunction:After 2 iterations, delta = 8.573750019073486 min 1 = 0.0 max 470 = 32.55887222290039, memory:  total 139 free 65 max 907
+MDPVI:ComputeV:Start iteration 3, memory:  total 139 free 65 max 907
+MDPVF:computeValueFunction:After 3 iterations, delta = 8.145062160491943 min 800 = 0.0 max 471 = 37.600040435791016, memory:  total 139 free 65 max 907
+MDPVI:ComputeV:Start iteration 4, memory:  total 139 free 65 max 907
+MDPVF:computeValueFunction:After 4 iterations, delta = 7.737808036804198 min 800 = 0.0 max 158 = 37.915164947509766, memory:  total 139 free 65 max 907
+MDPVI:ComputeV:Start iteration 5, memory:  total 139 free 65 max 907
+MDPVF:computeValueFunction:After 5 iterations, delta = 6.983374118804932 min 800 = 0.0 max 159 = 42.237335205078125, memory:  total 139 free 65 max 907
+MDPVI:ComputeV:Start iteration 6, memory:  total 139 free 65 max 907
+MDPVF:computeValueFunction:After 6 iterations, delta = 6.634205055236816 min 800 = 0.0 max 159 = 42.237335205078125, memory:  total 139 free 64 max 907
+MDPVI:ComputeV:Start iteration 7, memory:  total 139 free 64 max 907
+MDPVF:computeValueFunction:After 7 iterations, delta = 6.302494239807128 min 800 = 0.0 max 159 = 42.237335205078125, memory:  total 139 free 64 max 907
+MDPVI:ComputeV:Start iteration 8, memory:  total 139 free 64 max 907
+MDPVF:computeValueFunction:After 8 iterations, delta = 4.40126972198486 min 800 = 0.0 max 159 = 42.237335205078125, memory:  total 139 free 63 max 907
+MDPVI:ComputeV:Start iteration 9, memory:  total 139 free 63 max 907
+MDPVF:computeValueFunction:After 9 iterations, delta = 3.520436859130861 min 800 = 0.0 max 159 = 42.237335205078125, memory:  total 139 free 63 max 907
+MDPVI:ComputeV:Start iteration 10, memory:  total 139 free 63 max 907
+MDPVF:computeValueFunction:After 10 iterations, delta = 0.6499947547912583 min 800 = 0.0 max 159 = 42.237335205078125, memory:  total 139 free 63 max 907
+MDPVI:ComputeV:Start iteration 11, memory:  total 139 free 63 max 907
+MDPVF:computeValueFunction:After 11 iterations, delta = 0.08094568252563406 min 800 = 0.0 max 159 = 42.237335205078125, memory:  total 139 free 63 max 907
+MDPVI:ComputeV:Start iteration 12, memory:  total 139 free 63 max 907
+MDPVF:computeValueFunction:After 12 iterations, delta = 1.9073486328125E-6 min 800 = 0.0 max 159 = 42.237335205078125, memory:  total 139 free 63 max 907
+MDPVF:VI:MDP value iteration done - iterations 0 delta 1.9073486328125E-6, memory:  total 139 free 63 max 907
+Started FIB
+FIB: 0, 100.0
+FIB: 1, 18.525
+FIB: 2, 17.59875
+FIB: 3, 16.7188125
+FIB: 4, 15.882871874999998
+FIB: 5, 15.088728281249997
+FIB: 6, 12.970742353321283
+FIB: 7, 10.537021709421415
+FIB: 8, 10.010170623950344
+FIB: 9, 5.403600876626367
+FIB: 10, 3.4105147771629305
+FIB: 11, 2.413972852948813
+FIB: 12, 0.6174904716246807
+FIB: 13, 0.07689466691541824
+FIB: 14, 0.0
+Done FIB, max diff between QMDP and FIB is 3.3189020669510683E-6, 3.995777337451045E-6
+Begin HSVI_Tri, Initial width = 16.665835632786973
+HSVI_Tri:VI:HSVI_Tri: Iteration 0 initial width 12.846 V(b) 11.0957 V^(b) 23.9413 max depth 16 max width 31.643 Time 0 CPU time 0 CPU total 0 |V| 5 |V^| 17 #ObservedBS = 17 #BS 372 #backups 17 #V^(b) = 0 #HV(B) = 0 free memory 95 total memory 160 max memory 907	HSVI_Tri:VI:HSVI_Tri: Iteration 1 initial width 10.75 V(b) 13.1916 V^(b) 23.9413 max depth 12 max width 17.289 Time 0 CPU time 0 CPU total 0 |V| 14 |V^| 28 #ObservedBS = 28 #BS 649 #backups 30 #V^(b) = 0 #HV(B) = 0 free memory 135 total memory 210 max memory 907	HSVI_Tri:VI:HSVI_Tri: Iteration 2 initial width 9.568 V(b) 14.3737 V^(b) 23.9413 max depth 8 max width 19.279 Time 0 CPU time 0 CPU total 1 |V| 18 |V^| 35 #ObservedBS = 35 #BS 846 #backups 39 #V^(b) = 0 #HV(B) = 0 free memory 122 total memory 214 max memory 907	HSVI_Tri:VI:HSVI_Tri: Iteration 3 initial width 9.362 V(b) 14.3737 V^(b) 23.7353 max depth 12 max width 21.142 Time 0 CPU time 0 CPU total 1 |V| 21 |V^| 47 #ObservedBS = 47 #BS 1139 #backups 52 #V^(b) = 0 #HV(B) = 0 free memory 166 total memory 243 max memory 907	HSVI_Tri:VI:HSVI_Tri: Iteration 4 initial width 8.337 V(b) 14.8835 V^(b) 23.2202 max depth 15 max width 12.123 Time 1 CPU time 1 CPU total 2 |V| 35 |V^| 62 #ObservedBS = 62 #BS 1492 #backups 68 #V^(b) = 0 #HV(B) = 0 free memory 182 total memory 260 max memory 907	01234Avg. steps per trial 16
+
+POMDP:computeAverageDiscountedReward:After 500 tests. ADR 18.071, stdev 6.93414 SE 0.62021 time 0HSVI_Tri:VI:HSVI_Tri: Iteration 5 initial width 8.337 V(b) 14.8835 V^(b) 23.2202 max depth 8 max width 11.04 simulated ADR 18.070630061292047 filtered ADR 18.071 Time 0 CPU time 0 CPU total 3 |V| 41 |V^| 70 V changes 42 #ObservedBS = 70 #BS 1705 #backups 77 #V^(b) = 0 max depth 8 free memory 207 total memory 269 max memory 907HSVI_Tri:VI:HSVI_Tri: Iteration 6 initial width 7.222 V(b) 15.7112 V^(b) 22.9328 max depth 5 max width 15.632 Time 0 CPU time 0 CPU total 4 |V| 45 |V^| 75 #ObservedBS = 75 #BS 1857 #backups 83 #V^(b) = 0 #HV(B) = 0 free memory 214 total memory 286 max memory 907	HSVI_Tri:VI:HSVI_Tri: Iteration 7 initial width 6.447 V(b) 16.3893 V^(b) 22.8362 max depth 10 max width 9.638 Time 1 CPU time 1 CPU total 5 |V| 55 |V^| 85 #ObservedBS = 85 #BS 2110 #backups 94 #V^(b) = 0 #HV(B) = 0 free memory 202 total memory 284 max memory 907	HSVI_Tri:VI:HSVI_Tri: Iteration 8 initial width 5.301 V(b) 17.5355 V^(b) 22.8362 max depth 5 max width 10.083 Time 0 CPU time 0 CPU total 6 |V| 59 |V^| 86 #ObservedBS = 86 #BS 2204 #backups 100 #V^(b) = 0 #HV(B) = 0 free memory 157 total memory 290 max memory 907	HSVI_Tri:VI:HSVI_Tri: Iteration 9 initial width 5.301 V(b) 17.5355 V^(b) 22.8362 max depth 11 max width 6.416 Time 2 CPU time 2 CPU total 8 |V| 60 |V^| 97 #ObservedBS = 97 #BS 2477 #backups 112 #V^(b) = 0 #HV(B) = 0 free memory 202 total memory 293 max memory 907	01234Avg. steps per trial 15
+
+POMDP:computeAverageDiscountedReward:After 500 tests. ADR 17.763, stdev 6.27269 SE 0.56105 time 0HSVI_Tri:VI:HSVI_Tri: Iteration 10 initial width 5.122 V(b) 17.7143 V^(b) 22.8362 max depth 6 max width 6.07 simulated ADR 17.762863546476247 filtered ADR 17.917 Time 1 CPU time 1 CPU total 9 |V| 67 |V^| 101 V changes 68 #ObservedBS = 101 #BS 2619 #backups 119 #V^(b) = 0 max depth 6 free memory 232 total memory 295 max memory 907HSVI_Tri:VI:HSVI_Tri: Iteration 11 initial width 4.952 V(b) 17.8841 V^(b) 22.8362 max depth 5 max width 6.383 Time 1 CPU time 1 CPU total 11 |V| 71 |V^| 105 #ObservedBS = 105 #BS 2756 #backups 125 #V^(b) = 0 #HV(B) = 0 free memory 146 total memory 296 max memory 907	HSVI_Tri:VI:HSVI_Tri: Iteration 12 initial width 4.952 V(b) 17.8841 V^(b) 22.8362 max depth 9 max width 8.195 Time 1 CPU time 1 CPU total 13 |V| 71 |V^| 110 #ObservedBS = 110 #BS 2930 #backups 135 #V^(b) = 0 #HV(B) = 0 free memory 55 total memory 296 max memory 907	HSVI_Tri:VI:HSVI_Tri: Iteration 13 initial width 4.866 V(b) 17.9706 V^(b) 22.8362 max depth 16 max width 7.833 Time 3 CPU time 3 CPU total 16 |V| 87 |V^| 121 #ObservedBS = 121 #BS 3228 #backups 152 #V^(b) = 0 #HV(B) = 0 free memory 187 total memory 295 max memory 907	HSVI_Tri:VI:HSVI_Tri: Iteration 14 initial width 4.866 V(b) 17.9706 V^(b) 22.8362 max depth 7 max width 8.485 Time 1 CPU time 1 CPU total 18 |V| 89 |V^| 127 #ObservedBS = 127 #BS 3405 #backups 160 #V^(b) = 0 #HV(B) = 0 free memory 87 total memory 295 max memory 907	01234Avg. steps per trial 19
+
+POMDP:computeAverageDiscountedReward:After 500 tests. ADR 19.237, stdev 6.62102 SE 0.5922 time 0HSVI_Tri:VI:HSVI_Tri: Iteration 15 initial width 4.866 V(b) 17.9706 V^(b) 22.8362 max depth 12 max width 7.913 simulated ADR 19.23712830992615 filtered ADR 18.577 Time 3 CPU time 3 CPU total 21 |V| 92 |V^| 138 V changes 93 #ObservedBS = 138 #BS 3682 #backups 173 #V^(b) = 0 max depth 12 free memory 233 total memory 298 max memory 907HSVI_Tri:VI:HSVI_Tri: Iteration 16 initial width 4.866 V(b) 17.9706 V^(b) 22.8362 max depth 11 max width 8.785 Time 2 CPU time 2 CPU total 24 |V| 95 |V^| 146 #ObservedBS = 146 #BS 3909 #backups 185 #V^(b) = 0 #HV(B) = 0 free memory 77 total memory 299 max memory 907	HSVI_Tri:VI:HSVI_Tri: Iteration 17 initial width 4.701 V(b) 18.1351 V^(b) 22.8362 max depth 11 max width 5.674 Time 3 CPU time 3 CPU total 27 |V| 103 |V^| 155 #ObservedBS = 155 #BS 4152 #backups 197 #V^(b) = 0 #HV(B) = 0 free memory 115 total memory 300 max memory 907	HSVI_Tri:VI:HSVI_Tri: Iteration 18 initial width 4.623 V(b) 18.2132 V^(b) 22.8362 max depth 6 max width 7.051 Time 1 CPU time 1 CPU total 29 |V| 107 |V^| 156 #ObservedBS = 156 #BS 4252 #backups 204 #V^(b) = 0 #HV(B) = 0 free memory 45 total memory 301 max memory 907	HSVI_Tri:VI:HSVI_Tri: Iteration 19 initial width 4.354 V(b) 18.4824 V^(b) 22.8362 max depth 16 max width 7.167 Time 4 CPU time 4 CPU total 33 |V| 121 |V^| 169 #ObservedBS = 169 #BS 4580 #backups 221 #V^(b) = 0 #HV(B) = 0 free memory 64 total memory 302 max memory 907	01234Avg. steps per trial 19
+
+POMDP:computeAverageDiscountedReward:After 500 tests. ADR 19.07, stdev 6.35544 SE 0.56845 time 0HSVI_Tri:VI:HSVI_Tri: Iteration 20 initial width 4.098 V(b) 18.7382 V^(b) 22.8362 max depth 9 max width 6.644 simulated ADR 19.070410081048582 filtered ADR 18.824 Time 3 CPU time 3 CPU total 37 |V| 125 |V^| 175 V changes 126 #ObservedBS = 175 #BS 4768 #backups 231 #V^(b) = 0 max depth 9 free memory 239 total memory 305 max memory 907HSVI_Tri:VI:HSVI_Tri: Iteration 21 initial width 4.098 V(b) 18.7382 V^(b) 22.8362 max depth 15 max width 7.646 Time 5 CPU time 5 CPU total 42 |V| 130 |V^| 188 #ObservedBS = 188 #BS 5090 #backups 247 #V^(b) = 0 #HV(B) = 0 free memory 156 total memory 307 max memory 907	HSVI_Tri:VI:HSVI_Tri: Iteration 22 initial width 3.599 V(b) 19.2369 V^(b) 22.8362 max depth 8 max width 6.265 Time 3 CPU time 3 CPU total 45 |V| 134 |V^| 191 #ObservedBS = 191 #BS 5230 #backups 256 #V^(b) = 0 #HV(B) = 0 free memory 234 total memory 309 max memory 907	HSVI_Tri:VI:HSVI_Tri: Iteration 23 initial width 3.599 V(b) 19.2369 V^(b) 22.8362 max depth 12 max width 6.628 Time 4 CPU time 4 CPU total 50 |V| 137 |V^| 194 #ObservedBS = 194 #BS 5391 #backups 269 #V^(b) = 0 #HV(B) = 0 free memory 157 total memory 310 max memory 907	

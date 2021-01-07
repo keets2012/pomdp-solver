@@ -1,0 +1,63 @@
+#Steps per trials = 162
+Init value function to min
+Min R value = 0.0 init value = 0.0
+Begin blind policy computation  10 actions
+Done action 0 after 6 iterations |V| = 1
+Done action 1 after 6 iterations |V| = 1
+Done action 2 after 6 iterations |V| = 1
+Done action 3 after 6 iterations |V| = 1
+Done action 4 after 1 iterations |V| = 1
+Done action 5 after 1 iterations |V| = 1
+Done action 6 after 1 iterations |V| = 1
+Done action 7 after 1 iterations |V| = 1
+Done action 8 after 1 iterations |V| = 1
+.........Done action 9 after 91 iterations |V| = 1
+Done blind policy
+Starting MDP value iteration
+MDPVI:ComputeV:Starting to compute value function, memory:  total 138 free 65 max 907
+MDPVI:ComputeV:Start iteration 0, memory:  total 138 free 65 max 907
+MDPVF:computeValueFunction:After 0 iterations, delta = 18.073749637603758 min 1 = 0.0 max 673 = 19.5, memory:  total 138 free 65 max 907
+MDPVI:ComputeV:Start iteration 1, memory:  total 138 free 65 max 907
+MDPVF:computeValueFunction:After 1 iterations, delta = 9.025 min 1 = 0.0 max 468 = 26.311559677124023, memory:  total 138 free 64 max 907
+MDPVI:ComputeV:Start iteration 2, memory:  total 138 free 64 max 907
+MDPVF:computeValueFunction:After 2 iterations, delta = 8.573750019073486 min 1 = 0.0 max 470 = 32.55887222290039, memory:  total 138 free 64 max 907
+MDPVI:ComputeV:Start iteration 3, memory:  total 138 free 64 max 907
+MDPVF:computeValueFunction:After 3 iterations, delta = 8.145062160491943 min 800 = 0.0 max 471 = 37.600040435791016, memory:  total 138 free 64 max 907
+MDPVI:ComputeV:Start iteration 4, memory:  total 138 free 64 max 907
+MDPVF:computeValueFunction:After 4 iterations, delta = 7.737808036804198 min 800 = 0.0 max 158 = 37.915164947509766, memory:  total 138 free 63 max 907
+MDPVI:ComputeV:Start iteration 5, memory:  total 138 free 63 max 907
+MDPVF:computeValueFunction:After 5 iterations, delta = 6.983374118804932 min 800 = 0.0 max 159 = 42.237335205078125, memory:  total 138 free 63 max 907
+MDPVI:ComputeV:Start iteration 6, memory:  total 138 free 63 max 907
+MDPVF:computeValueFunction:After 6 iterations, delta = 6.634205055236816 min 800 = 0.0 max 159 = 42.237335205078125, memory:  total 138 free 63 max 907
+MDPVI:ComputeV:Start iteration 7, memory:  total 138 free 63 max 907
+MDPVF:computeValueFunction:After 7 iterations, delta = 6.302494239807128 min 800 = 0.0 max 159 = 42.237335205078125, memory:  total 138 free 63 max 907
+MDPVI:ComputeV:Start iteration 8, memory:  total 138 free 63 max 907
+MDPVF:computeValueFunction:After 8 iterations, delta = 4.40126972198486 min 800 = 0.0 max 159 = 42.237335205078125, memory:  total 138 free 62 max 907
+MDPVI:ComputeV:Start iteration 9, memory:  total 138 free 62 max 907
+MDPVF:computeValueFunction:After 9 iterations, delta = 3.520436859130861 min 800 = 0.0 max 159 = 42.237335205078125, memory:  total 138 free 62 max 907
+MDPVI:ComputeV:Start iteration 10, memory:  total 138 free 62 max 907
+MDPVF:computeValueFunction:After 10 iterations, delta = 0.6499947547912583 min 800 = 0.0 max 159 = 42.237335205078125, memory:  total 138 free 62 max 907
+MDPVI:ComputeV:Start iteration 11, memory:  total 138 free 62 max 907
+MDPVF:computeValueFunction:After 11 iterations, delta = 0.08094568252563406 min 800 = 0.0 max 159 = 42.237335205078125, memory:  total 138 free 62 max 907
+MDPVI:ComputeV:Start iteration 12, memory:  total 138 free 62 max 907
+MDPVF:computeValueFunction:After 12 iterations, delta = 1.9073486328125E-6 min 800 = 0.0 max 159 = 42.237335205078125, memory:  total 138 free 62 max 907
+MDPVF:VI:MDP value iteration done - iterations 0 delta 1.9073486328125E-6, memory:  total 138 free 62 max 907
+Started FIB
+FIB: 0, 100.0
+FIB: 1, 18.525
+FIB: 2, 17.59875
+FIB: 3, 16.7188125
+FIB: 4, 15.882871874999998
+FIB: 5, 15.088728281249997
+FIB: 6, 12.970742353321283
+FIB: 7, 10.537021709421415
+FIB: 8, 10.010170623950344
+FIB: 9, 5.403600876626367
+FIB: 10, 3.4105147771629305
+FIB: 11, 2.413972852948813
+FIB: 12, 0.6174904716246807
+FIB: 13, 0.07689466691541824
+FIB: 14, 0.0
+Done FIB, max diff between QMDP and FIB is 3.3189020669510683E-6, 3.995777337451045E-6
+Begin HSVI_Beta, Initial width = 16.665835632786973
+1118	266	237	221	231	237	244	252	244	212	217	216	209	196	264	201	210	200	209	209	199	202	200	196	204	213	207	198	206	209	213	210	204	222	208	209	208	217	207	217	205	207	211	205	200	213	205	224	221	215	203	208	204	205	199	202	199	196	195	201	208	199	195	196	199	199	200	200	206	197	201	197	196	198	197	196	197	196	203	198	200	199	197	198	199	199	199	202	204	201	198	206	198	209	198	202	198	201	208	210	195	200	198	196	196	205	198	200	201	195	196	208	198	196	198	195	196	199	199	200	201	195	196	195	213	196	196	197	199	209	204	200	194	202	204	197	196	197	216	204	199	210	204	198	196	201	201	198	198	202	202	209	202	203	199	203	204	208	210	199	204	201	201	204	201	197	200	202	198	209	201	203	202	200	200	203	202	201	205	204	215	202	195	206	199	200	197	203	208	200	198	199	199	211	203	200	206	198	197	203	200	204	198	199	197	204	209	208	207	208	201	203	201	199	200	201	204	206	204	198	200	199	207	197	204	209	197	201	211	202	202	197	198	200	196	202	209	200	201	205	199	196	198	196	225	200	217	202	210	206	212	197	206	203	195	200	196	201	212	197	209	202	201	207	202	197	207	203	221	200	207	207	196	212	201	205	200	197	210	210	206	201	199	201	201	198	196	217	205	206	215	212	205	212	198	198	201	212	201	199	198	205	204	200	214	209	206	203	198	201	202	197	200	199	214	211	198	210	201	204	201	209	199	196	199	220	209	209	209	215	200	202	206	207	202	207	198	199	212	207	202	211	213	207	212	204	203	198	201	198	211	203	199	212	202	207	204	200	204	205	200	202	207	208	205	210	208	199	198	198	197	197	200	201	207	200	198	202	199	205	202	198	206	207	206	204	207	197	206	199	209	201	207	198	202	198	198	204	201	203	200	217	207	203	198	201	201	202	206	197	199	207	197	213	198	201	205	200	201	197	197	197	199	214	202	202	201	199	202	227	214	253	202	230	203	207	220	219	213	216	209	228	216	215	208	205	198	197	213	212	

@@ -1,0 +1,178 @@
+#Steps per trials = 162
+Init value function to min
+Min R value = 0.0 init value = 0.0
+Begin blind policy computation  5 actions
+Done action 0 after 2 iterations |V| = 1
+Done action 1 after 3 iterations |V| = 1
+Done action 2 after 2 iterations |V| = 1
+Done action 3 after 2 iterations |V| = 1
+Done action 4 after 2 iterations |V| = 1
+Done blind policy
+Starting MDP value iteration
+MDPVI:ComputeV:Starting to compute value function, memory:  total 77 free 55 max 907
+MDPVI:ComputeV:Start iteration 0, memory:  total 77 free 55 max 907
+MDPVF:computeValueFunction:After 0 iterations, delta = 0.76 min 1 = 0.0 max 68 = 1.0197550058364868, memory:  total 77 free 55 max 907
+MDPVI:ComputeV:Start iteration 1, memory:  total 77 free 55 max 907
+MDPVF:computeValueFunction:After 1 iterations, delta = 0.5595541540533303 min 1 = 0.0 max 68 = 1.0398976802825928, memory:  total 77 free 55 max 907
+MDPVI:ComputeV:Start iteration 2, memory:  total 77 free 55 max 907
+MDPVF:computeValueFunction:After 2 iterations, delta = 0.29452544927597046 min 1 = 0.0 max 68 = 1.0772018432617188, memory:  total 77 free 55 max 907
+MDPVI:ComputeV:Start iteration 3, memory:  total 77 free 55 max 907
+MDPVF:computeValueFunction:After 3 iterations, delta = 0.22383933782577514 min 1 = 0.0 max 68 = 1.1202136278152466, memory:  total 77 free 55 max 907
+MDPVI:ComputeV:Start iteration 4, memory:  total 77 free 55 max 907
+MDPVF:computeValueFunction:After 4 iterations, delta = 0.19161824684590095 min 1 = 0.0 max 68 = 1.1660741567611694, memory:  total 77 free 55 max 907
+MDPVI:ComputeV:Start iteration 5, memory:  total 77 free 55 max 907
+MDPVF:computeValueFunction:After 5 iterations, delta = 0.1710780898481607 min 1 = 0.0 max 68 = 1.2149521112442017, memory:  total 77 free 55 max 907
+MDPVI:ComputeV:Start iteration 6, memory:  total 77 free 55 max 907
+MDPVF:computeValueFunction:After 6 iterations, delta = 0.15205512673594057 min 1 = 0.0 max 68 = 1.2687641382217407, memory:  total 77 free 55 max 907
+MDPVI:ComputeV:Start iteration 7, memory:  total 77 free 55 max 907
+MDPVF:computeValueFunction:After 7 iterations, delta = 0.13490874461829663 min 20 = 0.0 max 68 = 1.3261034488677979, memory:  total 77 free 55 max 907
+MDPVI:ComputeV:Start iteration 8, memory:  total 77 free 55 max 907
+MDPVF:computeValueFunction:After 8 iterations, delta = 0.11448736567050216 min 20 = 9.406652679899707E-6 max 68 = 1.384080410003662, memory:  total 77 free 55 max 907
+MDPVI:ComputeV:Start iteration 9, memory:  total 77 free 55 max 907
+MDPVF:computeValueFunction:After 9 iterations, delta = 0.1041412905603647 min 20 = 1.6450222756247967E-4 max 68 = 1.439941167831421, memory:  total 77 free 55 max 907
+MDPVI:ComputeV:Start iteration 10, memory:  total 77 free 55 max 907
+MDPVF:computeValueFunction:After 10 iterations, delta = 0.09651864923536774 min 20 = 0.0020204982720315456 max 68 = 1.4916504621505737, memory:  total 77 free 55 max 907
+MDPVI:ComputeV:Start iteration 11, memory:  total 77 free 55 max 907
+MDPVF:computeValueFunction:After 11 iterations, delta = 0.08758138507604599 min 20 = 0.021150950342416763 max 68 = 1.538383960723877, memory:  total 77 free 55 max 907
+MDPVI:ComputeV:Start iteration 12, memory:  total 77 free 55 max 907
+MDPVF:computeValueFunction:After 12 iterations, delta = 0.0759710897505283 min 20 = 0.06373002380132675 max 68 = 1.5802342891693115, memory:  total 77 free 55 max 907
+MDPVI:ComputeV:Start iteration 13, memory:  total 77 free 55 max 907
+MDPVF:computeValueFunction:After 13 iterations, delta = 0.06296692535281184 min 20 = 0.12036900967359543 max 68 = 1.617756962776184, memory:  total 77 free 55 max 907
+MDPVI:ComputeV:Start iteration 14, memory:  total 77 free 55 max 907
+MDPVF:computeValueFunction:After 14 iterations, delta = 0.05815141770988702 min 20 = 0.17852042615413666 max 68 = 1.651671051979065, memory:  total 77 free 55 max 907
+MDPVI:ComputeV:Start iteration 15, memory:  total 77 free 55 max 907
+MDPVF:computeValueFunction:After 15 iterations, delta = 0.051946749612689025 min 20 = 0.23046717047691345 max 68 = 1.6826825141906738, memory:  total 77 free 55 max 907
+MDPVI:ComputeV:Start iteration 16, memory:  total 77 free 55 max 907
+MDPVF:computeValueFunction:After 16 iterations, delta = 0.04327923431992531 min 20 = 0.27374640107154846 max 68 = 1.711356520652771, memory:  total 77 free 55 max 907
+MDPVI:ComputeV:Start iteration 17, memory:  total 77 free 55 max 907
+MDPVF:computeValueFunction:After 17 iterations, delta = 0.035221178233623474 min 20 = 0.30896759033203125 max 68 = 1.7380733489990234, memory:  total 77 free 55 max 907
+MDPVI:ComputeV:Start iteration 18, memory:  total 77 free 55 max 907
+MDPVF:computeValueFunction:After 18 iterations, delta = 0.029264680370688412 min 20 = 0.337959885597229 max 68 = 1.7630531787872314, memory:  total 77 free 55 max 907
+MDPVI:ComputeV:Start iteration 19, memory:  total 77 free 55 max 907
+MDPVF:computeValueFunction:After 19 iterations, delta = 0.027530900761485122 min 20 = 0.36271461844444275 max 68 = 1.7864086627960205, memory:  total 77 free 55 max 907
+MDPVI:ComputeV:Start iteration 20, memory:  total 77 free 55 max 907
+MDPVF:computeValueFunction:After 20 iterations, delta = 0.026034561842679937 min 20 = 0.3848702013492584 max 68 = 1.8081992864608765, memory:  total 77 free 55 max 907
+MDPVI:ComputeV:Start iteration 21, memory:  total 77 free 55 max 907
+MDPVF:computeValueFunction:After 21 iterations, delta = 0.02456205621361729 min 20 = 0.4055255949497223 max 68 = 1.8284701108932495, memory:  total 77 free 55 max 907
+MDPVI:ComputeV:Start iteration 22, memory:  total 77 free 55 max 907
+MDPVF:computeValueFunction:After 22 iterations, delta = 0.02303142517805079 min 20 = 0.4252540171146393 max 68 = 1.8472753763198853, memory:  total 77 free 55 max 907
+MDPVI:ComputeV:Start iteration 23, memory:  total 77 free 55 max 907
+MDPVF:computeValueFunction:After 23 iterations, delta = 0.021601369976997242 min 20 = 0.4442295432090759 max 68 = 1.864686131477356, memory:  total 77 free 55 max 907
+MDPVI:ComputeV:Start iteration 24, memory:  total 77 free 55 max 907
+MDPVF:computeValueFunction:After 24 iterations, delta = 0.020022439956664972 min 20 = 0.4623921811580658 max 68 = 1.8807889223098755, memory:  total 77 free 55 max 907
+MDPVI:ComputeV:Start iteration 25, memory:  total 77 free 55 max 907
+MDPVF:computeValueFunction:After 25 iterations, delta = 0.01841885060071935 min 20 = 0.47959473729133606 max 68 = 1.895678997039795, memory:  total 77 free 55 max 907
+MDPVI:ComputeV:Start iteration 26, memory:  total 77 free 55 max 907
+MDPVF:computeValueFunction:After 26 iterations, delta = 0.01688980162143694 min 20 = 0.4957020580768585 max 68 = 1.9094527959823608, memory:  total 77 free 55 max 907
+MDPVI:ComputeV:Start iteration 27, memory:  total 77 free 55 max 907
+MDPVF:computeValueFunction:After 27 iterations, delta = 0.015494066774845106 min 20 = 0.5106408596038818 max 68 = 1.922202706336975, memory:  total 77 free 55 max 907
+MDPVI:ComputeV:Start iteration 28, memory:  total 77 free 55 max 907
+MDPVF:computeValueFunction:After 28 iterations, delta = 0.014251963794231326 min 20 = 0.5244094729423523 max 68 = 1.93401300907135, memory:  total 77 free 55 max 907
+MDPVI:ComputeV:Start iteration 29, memory:  total 77 free 55 max 907
+MDPVF:computeValueFunction:After 29 iterations, delta = 0.013155401945114109 min 20 = 0.5370648503303528 max 68 = 1.944959044456482, memory:  total 77 free 55 max 907
+MDPVI:ComputeV:Start iteration 30, memory:  total 77 free 55 max 907
+MDPVF:computeValueFunction:After 30 iterations, delta = 0.012182188630104118 min 20 = 0.5486988425254822 max 68 = 1.9551069736480713, memory:  total 77 free 55 max 907
+MDPVI:ComputeV:Start iteration 31, memory:  total 77 free 55 max 907
+MDPVF:computeValueFunction:After 31 iterations, delta = 0.011306022107601121 min 20 = 0.5594154596328735 max 68 = 1.9645161628723145, memory:  total 77 free 55 max 907
+MDPVI:ComputeV:Start iteration 32, memory:  total 77 free 55 max 907
+MDPVF:computeValueFunction:After 32 iterations, delta = 0.010503684282302861 min 20 = 0.5693139433860779 max 68 = 1.973239779472351, memory:  total 77 free 55 max 907
+MDPVI:ComputeV:Start iteration 33, memory:  total 77 free 55 max 907
+MDPVF:computeValueFunction:After 33 iterations, delta = 0.009758965969085653 min 20 = 0.5784800052642822 max 68 = 1.9813263416290283, memory:  total 77 free 55 max 907
+MDPVI:ComputeV:Start iteration 34, memory:  total 77 free 55 max 907
+MDPVF:computeValueFunction:After 34 iterations, delta = 0.009061779975891082 min 20 = 0.5869831442832947 max 68 = 1.9888213872909546, memory:  total 77 free 55 max 907
+MDPVI:ComputeV:Start iteration 35, memory:  total 77 free 55 max 907
+MDPVF:computeValueFunction:After 35 iterations, delta = 0.008407284915447177 min 20 = 0.5948782563209534 max 68 = 1.9957668781280518, memory:  total 77 free 55 max 907
+MDPVI:ComputeV:Start iteration 36, memory:  total 77 free 55 max 907
+MDPVF:computeValueFunction:After 36 iterations, delta = 0.007793729007243955 min 20 = 0.6022095084190369 max 68 = 2.0022027492523193, memory:  total 77 free 55 max 907
+MDPVI:ComputeV:Start iteration 37, memory:  total 77 free 55 max 907
+MDPVF:computeValueFunction:After 37 iterations, delta = 0.00722065329551691 min 20 = 0.6090143322944641 max 68 = 2.0081660747528076, memory:  total 77 free 55 max 907
+MDPVI:ComputeV:Start iteration 38, memory:  total 77 free 55 max 907
+MDPVF:computeValueFunction:After 38 iterations, delta = 0.006687546074390371 min 20 = 0.6153263449668884 max 68 = 2.0136916637420654, memory:  total 77 free 55 max 907
+MDPVI:ComputeV:Start iteration 39, memory:  total 77 free 55 max 907
+MDPVF:computeValueFunction:After 39 iterations, delta = 0.006193455159664185 min 23 = 0.6211363077163696 max 68 = 2.0188117027282715, memory:  total 77 free 55 max 907
+MDPVI:ComputeV:Start iteration 40, memory:  total 77 free 55 max 907
+MDPVF:computeValueFunction:After 40 iterations, delta = 0.005736320912837933 min 23 = 0.6261900663375854 max 68 = 2.0235562324523926, memory:  total 77 free 55 max 907
+MDPVI:ComputeV:Start iteration 41, memory:  total 77 free 55 max 907
+MDPVF:computeValueFunction:After 41 iterations, delta = 0.0053141570091246315 min 23 = 0.630871057510376 max 68 = 2.0279529094696045, memory:  total 77 free 55 max 907
+MDPVI:ComputeV:Start iteration 42, memory:  total 77 free 55 max 907
+MDPVF:computeValueFunction:After 42 iterations, delta = 0.004923874735832223 min 23 = 0.6352069973945618 max 68 = 2.03202748298645, memory:  total 77 free 55 max 907
+MDPVI:ComputeV:Start iteration 43, memory:  total 77 free 55 max 907
+MDPVF:computeValueFunction:After 43 iterations, delta = 0.004563197493553162 min 23 = 0.6392239928245544 max 68 = 2.0358033180236816, memory:  total 77 free 55 max 907
+MDPVI:ComputeV:Start iteration 44, memory:  total 77 free 55 max 907
+MDPVF:computeValueFunction:After 44 iterations, delta = 0.004229109585285218 min 23 = 0.6429459452629089 max 68 = 2.0393025875091553, memory:  total 77 free 55 max 907
+MDPVI:ComputeV:Start iteration 45, memory:  total 77 free 55 max 907
+MDPVF:computeValueFunction:After 45 iterations, delta = 0.003919658958911776 min 23 = 0.6463950872421265 max 68 = 2.042546510696411, memory:  total 77 free 54 max 907
+MDPVI:ComputeV:Start iteration 46, memory:  total 77 free 54 max 907
+MDPVF:computeValueFunction:After 46 iterations, delta = 0.0036329919099806762 min 23 = 0.6495915651321411 max 68 = 2.045552968978882, memory:  total 77 free 54 max 907
+MDPVI:ComputeV:Start iteration 47, memory:  total 77 free 54 max 907
+MDPVF:computeValueFunction:After 47 iterations, delta = 0.003367030024528428 min 23 = 0.6525582671165466 max 68 = 2.048339366912842, memory:  total 77 free 54 max 907
+MDPVI:ComputeV:Start iteration 48, memory:  total 77 free 54 max 907
+MDPVF:computeValueFunction:After 48 iterations, delta = 0.0031203511357306146 min 23 = 0.6553118824958801 max 68 = 2.050921678543091, memory:  total 77 free 54 max 907
+MDPVI:ComputeV:Start iteration 49, memory:  total 77 free 54 max 907
+MDPVF:computeValueFunction:After 49 iterations, delta = 0.0028915083408355136 min 23 = 0.6578659415245056 max 68 = 2.0533149242401123, memory:  total 77 free 54 max 907
+MDPVI:ComputeV:Start iteration 50, memory:  total 77 free 54 max 907
+MDPVF:computeValueFunction:After 50 iterations, delta = 0.0026796361804007907 min 23 = 0.6602336764335632 max 68 = 2.055532932281494, memory:  total 77 free 54 max 907
+MDPVI:ComputeV:Start iteration 51, memory:  total 77 free 54 max 907
+MDPVF:computeValueFunction:After 51 iterations, delta = 0.0024830386042594688 min 23 = 0.6624282598495483 max 68 = 2.0575883388519287, memory:  total 77 free 54 max 907
+MDPVI:ComputeV:Start iteration 52, memory:  total 77 free 54 max 907
+MDPVF:computeValueFunction:After 52 iterations, delta = 0.002300966978073027 min 23 = 0.6644619703292847 max 68 = 2.05949330329895, memory:  total 77 free 54 max 907
+MDPVI:ComputeV:Start iteration 53, memory:  total 77 free 54 max 907
+MDPVF:computeValueFunction:After 53 iterations, delta = 0.0021323457360267195 min 23 = 0.6663466095924377 max 68 = 2.061258554458618, memory:  total 77 free 54 max 907
+MDPVI:ComputeV:Start iteration 54, memory:  total 77 free 54 max 907
+MDPVF:computeValueFunction:After 54 iterations, delta = 0.0019758927822112193 min 23 = 0.6680930852890015 max 68 = 2.062894582748413, memory:  total 77 free 54 max 907
+MDPVI:ComputeV:Start iteration 55, memory:  total 77 free 54 max 907
+MDPVF:computeValueFunction:After 55 iterations, delta = 0.0018311247229574334 min 23 = 0.6697115302085876 max 68 = 2.064410924911499, memory:  total 77 free 54 max 907
+MDPVI:ComputeV:Start iteration 56, memory:  total 77 free 54 max 907
+MDPVF:computeValueFunction:After 56 iterations, delta = 0.0016970100998878745 min 23 = 0.6712113618850708 max 68 = 2.0658161640167236, memory:  total 77 free 54 max 907
+MDPVI:ComputeV:Start iteration 57, memory:  total 77 free 54 max 907
+MDPVF:computeValueFunction:After 57 iterations, delta = 0.0015728116035460538 min 23 = 0.6726012229919434 max 68 = 2.0671184062957764, memory:  total 77 free 54 max 907
+MDPVI:ComputeV:Start iteration 58, memory:  total 77 free 54 max 907
+MDPVF:computeValueFunction:After 58 iterations, delta = 0.001457660794258131 min 23 = 0.6738893389701843 max 68 = 2.0683252811431885, memory:  total 77 free 54 max 907
+MDPVI:ComputeV:Start iteration 59, memory:  total 77 free 54 max 907
+MDPVF:computeValueFunction:After 59 iterations, delta = 0.0013510140776633595 min 23 = 0.6750831007957458 max 68 = 2.069443941116333, memory:  total 77 free 54 max 907
+MDPVI:ComputeV:Start iteration 60, memory:  total 77 free 54 max 907
+MDPVF:computeValueFunction:After 60 iterations, delta = 0.001252026259899064 min 23 = 0.6761894226074219 max 68 = 2.0704805850982666, memory:  total 77 free 54 max 907
+MDPVI:ComputeV:Start iteration 61, memory:  total 77 free 54 max 907
+MDPVF:computeValueFunction:After 61 iterations, delta = 0.0011603695154188687 min 23 = 0.6772148013114929 max 68 = 2.071441411972046, memory:  total 77 free 54 max 907
+MDPVI:ComputeV:Start iteration 62, memory:  total 77 free 54 max 907
+MDPVF:computeValueFunction:After 62 iterations, delta = 0.0010753008723258795 min 23 = 0.6781651377677917 max 68 = 2.072331666946411, memory:  total 77 free 54 max 907
+MDPVI:ComputeV:Start iteration 63, memory:  total 77 free 54 max 907
+MDPVF:computeValueFunction:After 63 iterations, delta = 9.965971112251282E-4 min 23 = 0.6790458559989929 max 68 = 2.0731568336486816, memory:  total 77 free 54 max 907
+MDPVF:VI:MDP value iteration done - iterations 0 delta 9.965971112251282E-4, memory:  total 77 free 54 max 907
+Started FIB
+FIB: 0, 1.0
+FIB: 1, 0.76
+FIB: 2, 0.7219999999999998
+FIB: 3, 0.5170057213500637
+FIB: 4, 0.28513468005008347
+FIB: 5, 0.21670235683806355
+FIB: 6, 0.1582968792026389
+FIB: 7, 0.14039040577232959
+FIB: 8, 0.12235781191674333
+FIB: 9, 0.10613858820347052
+FIB: 10, 0.09286883514361748
+FIB: 11, 0.08072508238209791
+FIB: 12, 0.07526098669994308
+FIB: 13, 0.06860485097409494
+FIB: 14, 0.059380417529325324
+FIB: 15, 0.04908631504884875
+FIB: 16, 0.044580491464045136
+FIB: 17, 0.04023253323615003
+FIB: 18, 0.034544418137979455
+FIB: 19, 0.02916321651277326
+FIB: 20, 0.024609464999155034
+FIB: 21, 0.021469092158019842
+FIB: 22, 0.02029213025930221
+FIB: 23, 0.01916968249516171
+FIB: 24, 0.01796993077645148
+FIB: 25, 0.016833722669584272
+FIB: 26, 0.015668479491271925
+FIB: 27, 0.01448661938191198
+FIB: 28, 0.013338218408044167
+FIB: 29, 0.012257663915351769
+FIB: 30, 0.011264318078009539
+FIB: 31, 0.010362909503250028
+FIB: 32, 0.00954921779018758
+Done FIB, max diff between QMDP and FIB is 0.29959864776910794, 0.0
+Begin HSVI, Initial width = 0.8715864439613977
+HSVI:VI:HSVI: Iteration 0 initial width 0.678 V(b) 0.1545 V^(b) 0.8321 max depth 135 max width 1.029 Time 3 CPU time 3 CPU total 3 |V| 114 |V^| 21 #ObservedBS = 21 #BS 2434 #backups 136 #V^(b) = 0 #HV(B) = 0 free memory 317 total memory 332 max memory 907	HSVI:VI:HSVI: Iteration 1 initial width 0.67 V(b) 0.1582 V^(b) 0.8286 max depth 12 max width 0.703 Time 1 CPU time 1 CPU total 5 |V| 122 |V^| 33 #ObservedBS = 33 #BS 3719 #backups 149 #V^(b) = 0 #HV(B) = 0 free memory 233 total memory 272 max memory 907	HSVI:VI:HSVI: Iteration 2 initial width 0.639 V(b) 0.1835 V^(b) 0.823 max depth 130 max width 0.812 Time 10 CPU time 10 CPU total 16 |V| 222 |V^| 54 #ObservedBS = 54 #BS 6213 #backups 280 #V^(b) = 0 #HV(B) = 0 free memory 76 total memory 109 max memory 907	HSVI:VI:HSVI: Iteration 3 initial width 0.634 V(b) 0.1877 V^(b) 0.8213 max depth 14 max width 0.759 Time 3 CPU time 3 CPU total 19 |V| 232 |V^| 67 #ObservedBS = 67 #BS 7587 #backups 295 #V^(b) = 0 #HV(B) = 0 free memory 19 total memory 109 max memory 907	HSVI:VI:HSVI: Iteration 4 initial width 0.616 V(b) 0.2016 V^(b) 0.8176 max depth 127 max width 0.73 Time 20 CPU time 20 CPU total 39 |V| 347 |V^| 92 #ObservedBS = 92 #BS 10394 #backups 423 #V^(b) = 0 #HV(B) = 0 free memory 24 total memory 99 max memory 907	01

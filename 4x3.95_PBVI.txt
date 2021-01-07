@@ -1,0 +1,13 @@
+#Steps per trials = 162
+Init value function to min
+Min R value = -1.0 init value = -19.999999999999982
+Begin blind policy computation  4 actions
+....Done action 0 after 46 iterations |V| = 1
+....Done action 1 after 46 iterations |V| = 2
+....Done action 2 after 45 iterations |V| = 3
+....Done action 3 after 46 iterations |V| = 4
+Done blind policy
+Begin PBVI
+Max delta over bs-1[(0-2)=0.111111,(4-5)=0.111111,7=0.111112,(8-10)=0.111111] from -2.436 to -2.316
+PBVI: Iteration 0,0 |Vn| = 3 |B| = 1 Delta = 0.1202 simulated ADR 0.0 filtered ADR 0.0 CPU time 0 CPU total 0 #backups 1 #dot product 127 |BS| 1 memory:  total 61 free 60 max 907
+Expanding belief space

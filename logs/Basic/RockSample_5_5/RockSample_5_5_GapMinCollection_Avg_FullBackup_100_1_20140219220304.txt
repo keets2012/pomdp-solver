@@ -1,0 +1,217 @@
+Model:RockSample_5_5
+Collection Algorithm:GapMinCollection_Avg
+Backup Ordering Algorithm:FullBackup
+# of Independent Trials: 1
+# of Beliefs Collected Per Step: 100
+# of Backup Iterations Per Step: 1
+Output File: RockSample_5_5_GapMinCollection_Avg_FullBackup_100_1_20140219220304.txt
+POMDPExperiment:main:Checking memory after GC, memory:  total 61 free 60 max 907
+Started loading model Models/RockSample_5_5.POMDP
+|A| = 10|O| = 2|S| = 801
+....................................Done loading model
+
+max is 10.0 min is -100.0
+POMDP is RockSample_5_5
+#Steps per trials = 162
+Init value function to min
+Min R value = 0.0 init value = 0.0
+Begin blind policy computation  10 actions
+Done action 0 after 6 iterations |V| = 1
+Done action 1 after 6 iterations |V| = 1
+Done action 2 after 6 iterations |V| = 1
+Done action 3 after 6 iterations |V| = 1
+Done action 4 after 1 iterations |V| = 1
+Done action 5 after 1 iterations |V| = 1
+Done action 6 after 1 iterations |V| = 1
+Done action 7 after 1 iterations |V| = 1
+Done action 8 after 1 iterations |V| = 1
+.........Done action 9 after 91 iterations |V| = 1
+Done blind policy
+Starting MDP value iteration
+MDPVI:ComputeV:Starting to compute value function, memory:  total 111 free 48 max 907
+MDPVI:ComputeV:Start iteration 0, memory:  total 111 free 48 max 907
+MDPVF:computeValueFunction:After 0 iterations, delta = 18.073749637603758 min 1 = 0.0 max 673 = 19.5, memory:  total 111 free 48 max 907
+MDPVI:ComputeV:Start iteration 1, memory:  total 111 free 48 max 907
+MDPVF:computeValueFunction:After 1 iterations, delta = 9.025 min 1 = 0.0 max 468 = 26.311559677124023, memory:  total 111 free 48 max 907
+MDPVI:ComputeV:Start iteration 2, memory:  total 111 free 48 max 907
+MDPVF:computeValueFunction:After 2 iterations, delta = 8.573750019073486 min 1 = 0.0 max 470 = 32.55887222290039, memory:  total 111 free 47 max 907
+MDPVI:ComputeV:Start iteration 3, memory:  total 111 free 47 max 907
+MDPVF:computeValueFunction:After 3 iterations, delta = 8.145062160491943 min 800 = 0.0 max 471 = 37.600040435791016, memory:  total 111 free 47 max 907
+MDPVI:ComputeV:Start iteration 4, memory:  total 111 free 47 max 907
+MDPVF:computeValueFunction:After 4 iterations, delta = 7.737808036804198 min 800 = 0.0 max 158 = 37.915164947509766, memory:  total 111 free 47 max 907
+MDPVI:ComputeV:Start iteration 5, memory:  total 111 free 47 max 907
+MDPVF:computeValueFunction:After 5 iterations, delta = 6.983374118804932 min 800 = 0.0 max 159 = 42.237335205078125, memory:  total 111 free 46 max 907
+MDPVI:ComputeV:Start iteration 6, memory:  total 111 free 46 max 907
+MDPVF:computeValueFunction:After 6 iterations, delta = 6.634205055236816 min 800 = 0.0 max 159 = 42.237335205078125, memory:  total 111 free 46 max 907
+MDPVI:ComputeV:Start iteration 7, memory:  total 111 free 46 max 907
+MDPVF:computeValueFunction:After 7 iterations, delta = 6.302494239807128 min 800 = 0.0 max 159 = 42.237335205078125, memory:  total 111 free 46 max 907
+MDPVI:ComputeV:Start iteration 8, memory:  total 111 free 46 max 907
+MDPVF:computeValueFunction:After 8 iterations, delta = 4.40126972198486 min 800 = 0.0 max 159 = 42.237335205078125, memory:  total 111 free 46 max 907
+MDPVI:ComputeV:Start iteration 9, memory:  total 111 free 46 max 907
+MDPVF:computeValueFunction:After 9 iterations, delta = 3.520436859130861 min 800 = 0.0 max 159 = 42.237335205078125, memory:  total 111 free 45 max 907
+MDPVI:ComputeV:Start iteration 10, memory:  total 111 free 45 max 907
+MDPVF:computeValueFunction:After 10 iterations, delta = 0.6499947547912583 min 800 = 0.0 max 159 = 42.237335205078125, memory:  total 111 free 45 max 907
+MDPVI:ComputeV:Start iteration 11, memory:  total 111 free 45 max 907
+MDPVF:computeValueFunction:After 11 iterations, delta = 0.08094568252563406 min 800 = 0.0 max 159 = 42.237335205078125, memory:  total 111 free 44 max 907
+MDPVI:ComputeV:Start iteration 12, memory:  total 111 free 44 max 907
+MDPVF:computeValueFunction:After 12 iterations, delta = 1.9073486328125E-6 min 800 = 0.0 max 159 = 42.237335205078125, memory:  total 111 free 44 max 907
+MDPVF:VI:MDP value iteration done - iterations 0 delta 1.9073486328125E-6, memory:  total 111 free 44 max 907
+Started FIB
+FIB: 0, 100.0
+FIB: 1, 18.525
+FIB: 2, 17.59875
+FIB: 3, 16.7188125
+FIB: 4, 15.882871874999998
+FIB: 5, 15.088728281249997
+FIB: 6, 12.970742353321283
+FIB: 7, 10.537021709421415
+FIB: 8, 10.010170623950344
+FIB: 9, 5.403600876626367
+FIB: 10, 3.4105147771629305
+FIB: 11, 2.413972852948813
+FIB: 12, 0.6174904716246807
+FIB: 13, 0.07689466691541824
+FIB: 14, 0.0
+Done FIB, max diff between QMDP and FIB is 3.3189020669510683E-6, 3.995777337451045E-6
+
+
+Starting POMDP solver
+Collection Algorithm: GapMinCollection_Avg  Ordering Algorithm:  FullBackup
+
+0.0
+	Avg. steps per trial 5
+
+POMDP:computeAverageDiscountedReward:After 500 tests. ADR 8.145, stdev 0.0 SE 0.0 time 0
+Init value function to min
+Min R value = 0.0 init value = 0.0
+
+Expanding belief space:
+initial width = 16.665835632786973
+Started exploring for 100 points.
+..........................................................................................
+Done expansion: 100, 899, 1168
+Finished expansion, 100 new belief points
+Improving value function:
+Finished improving
+Current Time: 1.005182235
+Iteration 0 |Vn| = 6 |B| = 100 Delta = 1.0 Time 1301 Initial Belief Time 1 Belief Collection Time 888 Update Time 115 #backups: 100 #dot product: 41341 |BS| 1 memory:  total: 121 free: 45 max: 907
+
+Expanding belief space:
+initial width = 24.153794197293617
+Started exploring for 100 points.
+...............................................................................................
+Done expansion: 100, 946, 1685
+Finished expansion, 100 new belief points
+Improving value function:
+Finished improving
+Current Time: 4.339422268
+Iteration 1 |Vn| = 29 |B| = 200 Delta = 1.0 Time 4665 Initial Belief Time 1 Belief Collection Time 4053 Update Time 285 #backups: 300 #dot product: 199783 |BS| 1 memory:  total: 134 free: 28 max: 907
+
+Expanding belief space:
+initial width = 23.766999007196834
+Started exploring for 100 points.
+...............................................
+Done expansion: 100, 469, 878
+UpperBoundValueIteration:pruneUpperBound:Pruned from 1236 to 976Finished expansion, 100 new belief points
+Improving value function:
+Finished improving
+Current Time: 8.251257103
+Computing Solution Quality:
+	Avg. steps per trial 7
+
+POMDP:computeAverageDiscountedReward:After 500 tests. ADR 11.02, stdev 4.73898 SE 0.42387 time 0
+POMDPSolver:main:ADR = 11.020483906250035, time = 8.251257103
+Iteration 2 |Vn| = 66 |B| = 300 Delta = 1.0 Time 9116 Initial Belief Time 1 Belief Collection Time 7463 Update Time 786 #backups: 600 #dot product: 649241 |BS| 1 memory:  total: 154 free: 47 max: 907
+
+Expanding belief space:
+initial width = 13.792747542324433
+Started exploring for 100 points.
+.....................................................
+Done expansion: 100, 526, 926
+UpperBoundValueIteration:pruneUpperBound:Pruned from 1399 to 1324Finished expansion, 100 new belief points
+Improving value function:
+Finished improving
+Current Time: 11.67876407
+Iteration 3 |Vn| = 102 |B| = 400 Delta = 1.0 Time 12570 Initial Belief Time 1 Belief Collection Time 10004 Update Time 1672 #backups: 1000 #dot product: 1751241 |BS| 1 memory:  total: 164 free: 71 max: 907
+
+Expanding belief space:
+initial width = 12.838691788589859
+Started exploring for 100 points.
+.....................................
+Done expansion: 100, 364, 598
+UpperBoundValueIteration:pruneUpperBound:Pruned from 1572 to 1489Finished expansion, 100 new belief points
+Improving value function:
+Finished improving
+Current Time: 15.165475189
+Computing Solution Quality:
+	Avg. steps per trial 18
+
+POMDP:computeAverageDiscountedReward:After 500 tests. ADR 17.441, stdev 6.55192 SE 0.58602 time 1
+POMDPSolver:main:ADR = 17.44115576768493, time = 15.165475189
+Iteration 4 |Vn| = 157 |B| = 500 Delta = 1.0 Time 17475 Initial Belief Time 1 Belief Collection Time 11989 Update Time 3174 #backups: 1500 #dot product: 3292459 |BS| 1 memory:  total: 174 free: 24 max: 907
+
+Expanding belief space:
+initial width = 10.843497891004535
+Started exploring for 100 points.
+.....................................................................
+Done expansion: 100, 690, 1179
+UpperBoundValueIteration:pruneUpperBound:Pruned from 1919 to 1731Finished expansion, 100 new belief points
+Improving value function:
+Finished improving
+Current Time: 21.768845607
+Computing Solution Quality:
+	Avg. steps per trial 18
+
+POMDP:computeAverageDiscountedReward:After 500 tests. ADR 18.132, stdev 5.62164 SE 0.50282 time 2
+POMDPSolver:main:ADR = 18.13193284844874, time = 21.768845607
+Iteration 5 |Vn| = 245 |B| = 600 Delta = 1.0 Time 26440 Initial Belief Time 1 Belief Collection Time 16113 Update Time 5653 #backups: 2100 #dot product: 6915690 |BS| 1 memory:  total: 192 free: 100 max: 907
+
+Expanding belief space:
+initial width = 9.76366702186991
+Started exploring for 100 points.
+...........................................................................
+Done expansion: 100, 748, 1260
+UpperBoundValueIteration:pruneUpperBound:Pruned from 2310 to 2105Finished expansion, 100 new belief points
+Improving value function:
+Finished improving
+Current Time: 32.336911486
+Computing Solution Quality:
+	Avg. steps per trial 18
+
+POMDP:computeAverageDiscountedReward:After 500 tests. ADR 18.188, stdev 5.62326 SE 0.50296 time 3
+POMDPSolver:main:ADR = 18.187845647735823, time = 32.336911486
+Iteration 6 |Vn| = 349 |B| = 700 Delta = 1.0 Time 40457 Initial Belief Time 1 Belief Collection Time 22554 Update Time 9780 #backups: 2800 #dot product: 13125732 |BS| 1 memory:  total: 210 free: 17 max: 907
+
+Expanding belief space:
+initial width = 7.453979898597304
+Started exploring for 100 points.
+.....................................................................
+Done expansion: 100, 690, 1271
+UpperBoundValueIteration:pruneUpperBound:Pruned from 2697 to 2583Finished expansion, 100 new belief points
+Improving value function:
+Finished improving
+Current Time: 54.548970888
+Computing Solution Quality:
+	Avg. steps per trial 18
+
+POMDP:computeAverageDiscountedReward:After 500 tests. ADR 18.21, stdev 5.69604 SE 0.50947 time 4
+POMDPSolver:main:ADR = 18.210108810370027, time = 54.548970888
+Iteration 7 |Vn| = 446 |B| = 800 Delta = 1.0 Time 67136 Initial Belief Time 1 Belief Collection Time 38106 Update Time 16441 #backups: 3600 #dot product: 22038931 |BS| 1 memory:  total: 242 free: 65 max: 907
+
+Expanding belief space:
+initial width = 7.453979898597304
+Started exploring for 100 points.
+................................................
+Done expansion: 100, 472, 712
+UpperBoundValueIteration:pruneUpperBound:Pruned from 2891 to 2761Finished expansion, 100 new belief points
+Improving value function:
+Finished improving
+Current Time: 68.886878383
+Computing Solution Quality:
+	Avg. steps per trial 18
+
+POMDP:computeAverageDiscountedReward:After 500 tests. ADR 19.086, stdev 6.15074 SE 0.55014 time 4
+POMDPSolver:main:ADR = 19.085625225647963, time = 68.886878383
+Iteration 8 |Vn| = 533 |B| = 900 Delta = 1.0 Time 86314 Initial Belief Time 1 Belief Collection Time 44176 Update Time 24709 #backups: 4500 #dot product: 32081563 |BS| 1 memory:  total: 257 free: 18 max: 907
+Finished Collection Algorithm: GapMinCollection_Avg  Ordering Algorithm:  FullBackup - Model : RockSample_5_5 - time : 68.886878383 |BS| = 900 |V| = 533 backups = 4500 GComputations = 9000 Initial Belief Time 1 Belief Collection Time 44176 Update Time 24709
+----------------

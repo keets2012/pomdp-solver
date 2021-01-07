@@ -1,0 +1,3 @@
+GapMinCollection	PerseusBackup
+60.0	56.428290338	0.18337959393032754	0.0390473628772995
+GapMinCollection	PerseusBackup

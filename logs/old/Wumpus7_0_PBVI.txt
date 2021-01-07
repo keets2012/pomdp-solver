@@ -1,0 +1,80 @@
+#Steps per trials = 162
+Init value function to min
+Min R value = -100.0 init value = -1999.9999999999982
+Begin blind policy computation  4 actions
+.............Done action 0 after 136 iterations |V| = 1
+.............Done action 1 after 136 iterations |V| = 2
+.............Done action 2 after 136 iterations |V| = 3
+.............Done action 3 after 136 iterations |V| = 4
+Done blind policy
+Begin PBVI
+Max delta over bs-1[0=0.03125,49=0.03125,98=0.03125,147=0.03125,196=0.03125,245=0.03125,294=0.03125,343=0.03125,392=0.03125,441=0.03125,490=0.03125,539=0.03125,588=0.03125,637=0.03125,686=0.03125,735=0.03125,784=0.03125,833=0.03125,882=0.03125,931=0.03125,980=0.03125,1029=0.03125,1078=0.03125,1127=0.03125,1176=0.03125,1225=0.03125,1274=0.03125,1323=0.03125,1372=0.03125,1421=0.03125,1470=0.03125,1519=0.03125] from -1.868 to -1.775
+PBVI: Iteration 0,0 |Vn| = 5 |B| = 1 Delta = 0.0934 simulated ADR 0.0 filtered ADR 0.0 CPU time 0 CPU total 0 #backups 1 #dot product 32 |BS| 1 memory:  total 172 free 89 max 907
+Expanding belief space
+Expanded belief space - |B| = 101
+Max delta over bs-1[1124=0.5,1516=0.5] from -1.305 to 7.511
+01234Avg. steps per trial 19
+
+POMDP:computeAverageDiscountedReward:After 500 tests. ADR 1.845, stdev 2.39964 SE 0.21463 time 1PBVI: Iteration 1,0 |Vn| = 102 |B| = 101 Delta = 8.8158 simulated ADR 1.8445664407440847 filtered ADR 1.845 CPU time 0 CPU total 0 #backups 102 #dot product 29999 |BS| 1 memory:  total 188 free 103 max 907
+Expanding belief space
+Expanded belief space - |B| = 201
+Max delta over bs-1[902=0.5,951=0.5] from -0.422 to 5.329
+01234Avg. steps per trial 17
+
+POMDP:computeAverageDiscountedReward:After 500 tests. ADR 2.627, stdev 2.63167 SE 0.23538 time 3PBVI: Iteration 2,0 |Vn| = 298 |B| = 201 Delta = 5.7512 simulated ADR 2.6274664557297274 filtered ADR 2.627 CPU time 0 CPU total 1 #backups 303 #dot product 242244 |BS| 1 memory:  total 207 free 117 max 907
+Expanding belief space
+Expanded belief space - |B| = 301
+Max delta over bs-1[909=0.5,958=0.5] from -0.295 to 6.908
+01Avg. steps per trial 17
+
+POMDP:computeAverageDiscountedReward:After 161 tests. ADR 4.403, stdev 0.35899 SE 0.05658 time 2PBVI: Iteration 3,0 |Vn| = 596 |B| = 301 Delta = 7.2028 simulated ADR 4.402776284959348 filtered ADR 4.403 CPU time 1 CPU total 2 #backups 604 #dot product 921757 |BS| 1 memory:  total 208 free 113 max 907
+Expanding belief space
+Expanded belief space - |B| = 401
+Max delta over bs-1[901=0.166666,950=0.166666,999=0.166666,1048=0.166666,1097=0.166666,1146=0.166666] from 1.124 to 5.375
+01Avg. steps per trial 16
+
+POMDP:computeAverageDiscountedReward:After 161 tests. ADR 4.462, stdev 0.36665 SE 0.05779 time 3PBVI: Iteration 4,0 |Vn| = 990 |B| = 401 Delta = 4.2507 simulated ADR 4.462138754272104 filtered ADR 4.462 CPU time 3 CPU total 5 #backups 1005 #dot product 2480601 |BS| 1 memory:  total 208 free 105 max 907
+Expanding belief space
+Expanded belief space - |B| = 501
+Max delta over bs-1[909=0.166666,958=0.166666,1007=0.166666,1056=0.166666,1105=0.166666,1154=0.166666] from 1.432 to 4.851
+01Avg. steps per trial 16
+
+POMDP:computeAverageDiscountedReward:After 121 tests. ADR 4.463, stdev 0.41628 SE 0.07569 time 4PBVI: Iteration 5,0 |Vn| = 1487 |B| = 501 Delta = 3.4184 simulated ADR 4.463074693451573 filtered ADR 4.463 CPU time 5 CPU total 12 #backups 1506 #dot product 5444205 |BS| 1 memory:  total 213 free 101 max 907
+Expanding belief space
+Expanded belief space - |B| = 601
+Max delta over bs-1[1083=0.25,1132=0.25,1475=0.25,1524=0.25] from -0.032 to 4.634
+01Avg. steps per trial 16
+
+POMDP:computeAverageDiscountedReward:After 161 tests. ADR 4.464, stdev 0.37399 SE 0.05895 time 8PBVI: Iteration 6,0 |Vn| = 2083 |B| = 601 Delta = 4.6665 simulated ADR 4.463509957591553 filtered ADR 4.464 CPU time 10 CPU total 22 #backups 2107 #dot product 10485275 |BS| 1 memory:  total 275 free 151 max 907
+Expanding belief space
+Expanded belief space - |B| = 701
+Max delta over bs-1[796=0.125,845=0.125,894=0.125,943=0.125,992=0.125,1041=0.125,1090=0.125,1139=0.125] from 4.512 to 6.011
+01Avg. steps per trial 16
+
+POMDP:computeAverageDiscountedReward:After 151 tests. ADR 4.463, stdev 0.37923 SE 0.06172 time 11PBVI: Iteration 7,0 |Vn| = 2779 |B| = 701 Delta = 1.4987 simulated ADR 4.46292789464812 filtered ADR 4.463 CPU time 15 CPU total 37 #backups 2808 #dot product 18406403 |BS| 1 memory:  total 282 free 143 max 907
+Expanding belief space
+Expanded belief space - |B| = 801
+Max delta over bs-1[1026=0.111111,1075=0.111111,1124=0.111111,1222=0.111111,1271=0.111111,1320=0.111111,1418=0.111111,1467=0.111111,1516=0.111111] from 0.942 to 5.232
+01Avg. steps per trial 16
+
+POMDP:computeAverageDiscountedReward:After 151 tests. ADR 4.53, stdev 0.37637 SE 0.06126 time 14PBVI: Iteration 8,0 |Vn| = 3575 |B| = 801 Delta = 4.2896 simulated ADR 4.530088709860252 filtered ADR 4.53 CPU time 23 CPU total 61 #backups 3609 #dot product 30131500 |BS| 1 memory:  total 297 free 143 max 907
+Expanding belief space
+Expanded belief space - |B| = 901
+Max delta over bs-1[76=0.083333,125=0.083333,174=0.083333,272=0.083333,321=0.083333,370=0.083333,468=0.083333,517=0.083333,566=0.083333,664=0.083333,713=0.083333,762=0.083333] from 2.256 to 4.356
+01Avg. steps per trial 16
+
+POMDP:computeAverageDiscountedReward:After 171 tests. ADR 4.48, stdev 0.34809 SE 0.05324 time 21PBVI: Iteration 9,0 |Vn| = 4467 |B| = 901 Delta = 2.1 simulated ADR 4.479697179711918 filtered ADR 4.48 CPU time 32 CPU total 93 #backups 4510 #dot product 46672518 |BS| 1 memory:  total 390 free 219 max 907
+Expanding belief space
+Expanded belief space - |B| = 1001
+Max delta over bs-1[46=0.055555,95=0.055555,144=0.055555,242=0.055555,291=0.055555,340=0.055555,438=0.055555,487=0.055555,536=0.055555,634=0.055555,683=0.055555,732=0.055555,830=0.055555,879=0.055555,928=0.055555,1026=0.055555,1075=0.055555,1124=0.055555] from 0.555 to 3.68
+01Avg. steps per trial 17
+
+POMDP:computeAverageDiscountedReward:After 161 tests. ADR 4.372, stdev 0.36207 SE 0.05707 time 24PBVI: Iteration 10,0 |Vn| = 5457 |B| = 1001 Delta = 3.1248 simulated ADR 4.37236912216127 filtered ADR 4.372 CPU time 45 CPU total 139 #backups 5511 #dot product 69185446 |BS| 1 memory:  total 423 free 232 max 907
+Expanding belief space
+Expanded belief space - |B| = 1101
+Max delta over bs-1[395=0.041666,444=0.041666,493=0.041666,542=0.041666,591=0.041666,640=0.041666,689=0.041666,738=0.041666,787=0.041666,836=0.041666,885=0.041666,934=0.041666,983=0.041666,1032=0.041666,1081=0.041666,1130=0.041666,1179=0.041666,1228=0.041666,1277=0.041666,1326=0.041666,1375=0.041666,1424=0.041666,1473=0.041666,1522=0.041666] from 2.847 to 4.668
+01Avg. steps per trial 17
+
+POMDP:computeAverageDiscountedReward:After 161 tests. ADR 4.403, stdev 0.35588 SE 0.0561 time 31PBVI: Iteration 11,0 |Vn| = 6546 |B| = 1101 Delta = 1.8202 simulated ADR 4.402690197422819 filtered ADR 4.403 CPU time 59 CPU total 198 #backups 6612 #dot product 98987293 |BS| 1 memory:  total 455 free 243 max 907
+Expanding belief space
+Expanded belief space - |B| = 1201

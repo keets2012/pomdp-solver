@@ -1,4 +1,4 @@
-﻿package pomdp.integral;
+package pomdp.integral;
 
 public class Beta extends Eval {
 

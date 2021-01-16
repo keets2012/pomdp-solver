@@ -1,9 +1,3 @@
-/*
- * Created on May 3, 2005
- *
- * To change the template for this generated file go to
- * Window&gt;Preferences&gt;Java&gt;Code Generation&gt;Code and Comments
- */
 package pomdp;
 
 import java.text.SimpleDateFormat;
@@ -28,7 +22,7 @@ import pomdp.utilities.visualisation.VisualisationUnit;
 import pomdp.valuefunction.MDPValueFunction;
 
 
-public class POMDPSolver {
+public class Main {
 
     public static void main(String[] args) {
         JProf.getCurrentThreadCpuTimeSafe();
@@ -48,7 +42,8 @@ public class POMDPSolver {
 //		String sModelName = "4x3.95";
         //String sModelName = "tagAvoid";
         //String sModelName = "tiger-grid";
-        String sMethodName = "HSVI_Tri";
+        String sMethodName = "FSVI";
+//        String sMethodName = "HSVI_Tri";
         long maxExecutionTime = 1000 * 60 * 10;
         int maxIteration = 100;
 
@@ -74,7 +69,7 @@ public class POMDPSolver {
         }
 
 
-        //³õÊ¼»¯Logger
+        //ï¿½ï¿½Ê¼ï¿½ï¿½Logger
         Logger.getInstance().setOutput(true);
         Logger.getInstance().setSilent(false);
         try {
@@ -95,7 +90,7 @@ public class POMDPSolver {
 
         /* target Running time (in seconds), if we want to stop at a specified time */
         int maxRunningTime = 45;
-        //Êµ¼ÊÉÏÃ»ÓÐÓÃµ½
+        //Êµï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½Ãµï¿½
         int numEvaluations = 3;
         /* load the POMDP model */
         try {
@@ -130,7 +125,7 @@ public class POMDPSolver {
             else {
                 pomdp = new POMDP();
                 pomdp.load(sPath + sModelName + ".POMDP");
-                //Êä³ö×î´ó»Ø±¨Öµ¡¢×îÐ¡»Ø±¨Öµ
+                //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø±ï¿½Öµï¿½ï¿½ï¿½ï¿½Ð¡ï¿½Ø±ï¿½Öµ
                 Logger.getInstance().logln("max is " + pomdp.getMaxR() + " min is " + pomdp.getMinR());
             }
         } catch (Exception e) {
@@ -160,7 +155,7 @@ public class POMDPSolver {
             System.exit(0);
         }
 
-        //TODO ×öÁËblind policy£¬»ñµÃPointBasedValueIteration
+        //TODO ï¿½ï¿½ï¿½ï¿½blind policyï¿½ï¿½ï¿½ï¿½ï¿½PointBasedValueIteration
         ValueIteration viAlgorithm = AlgorithmsFactory.getAlgorithm(sMethodName, pomdp);
         viAlgorithm.setM_maxExecutionTime(maxExecutionTime);
 

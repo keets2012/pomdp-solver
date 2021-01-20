@@ -8,6 +8,7 @@ import pomdp.algorithms.online.RealTimeDynamicProgramming;
 import pomdp.algorithms.pointbased.ForwardSearchValueIteration;
 import pomdp.algorithms.pointbased.GenericValueIteration;
 import pomdp.algorithms.pointbased.HeuristicSearchValueIteration;
+import pomdp.algorithms.pointbased.PForwardSearchValueIteration;
 import pomdp.algorithms.pointbased.PerseusValueIteration;
 import pomdp.algorithms.pointbased.PointBasedErrorMinimization;
 import pomdp.algorithms.pointbased.PointBasedValueIteration;
@@ -22,6 +23,8 @@ import pomdp.valuefunction.MDPValueFunction;
 
 public class AlgorithmsFactory {
     public static ValueIteration getAlgorithm(String sName, POMDP pomdp) {
+        if (sName.equals("PFSVI"))
+            return new PForwardSearchValueIteration(pomdp);
         if (sName.equals("FSVI"))
             return new ForwardSearchValueIteration(pomdp);
         if (sName.equals("PBVI"))

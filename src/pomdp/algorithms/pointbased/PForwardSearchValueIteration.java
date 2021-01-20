@@ -6,6 +6,7 @@ import pomdp.environments.FactoredPOMDP.BeliefType;
 import pomdp.environments.POMDP;
 import pomdp.utilities.AlphaVector;
 import pomdp.utilities.BeliefState;
+import pomdp.utilities.BeliefStateVector;
 import pomdp.utilities.ExecutionProperties;
 import pomdp.utilities.HeuristicPolicy;
 import pomdp.utilities.JProf;
@@ -33,6 +34,8 @@ public class PForwardSearchValueIteration extends ValueIteration {
     protected SortedMap<Double, Integer>[][] m_amNextStates;
     private HeuristicType m_htType;
     public static HeuristicType DEFAULT_HEURISTIC = HeuristicType.MDP;
+    //初始化信念点集合B
+    BeliefStateVector<BeliefState> vBeliefPoints = new BeliefStateVector<BeliefState>();
 
     public enum HeuristicType {
         MDP, ObservationAwareMDP, DeterministicTransitionsPOMDP, DeterministicObservationsPOMDP, DeterministicPOMDP, LimitedBeliefMDP, HeuristicPolicy
@@ -50,7 +53,12 @@ public class PForwardSearchValueIteration extends ValueIteration {
     }
 
     public PForwardSearchValueIteration(POMDP pomdp, HeuristicType htType) {
+
         super(pomdp);
+        //把b0加入B
+        /* initialize the list of belief points with the initial belief state */
+        vBeliefPoints.add(null, m_pPOMDP.getBeliefStateFactory().getInitialBeliefState());
+
         m_htType = htType;
         m_iDepth = 0;
         m_iIteration = 0;
@@ -76,7 +84,7 @@ public class PForwardSearchValueIteration extends ValueIteration {
             m_vfMDP.valueIteration(1000, ExecutionProperties.getEpsilon());
         }
         lAfter = JProf.getCurrentThreadCpuTimeSafe();
-        Logger.getInstance().log("FSVI", 0, "initHeurisitc", "Initialization time was " + (lAfter - lBefore) / 1000000);
+        Logger.getInstance().log("PFSVI", 0, "initHeurisitc", "Initialization time was " + (lAfter - lBefore) / 1000000);
     }
 
     public void valueIteration(int cMaxSteps, double dEpsilon, double dTargetValue, int maxRunningTime, int numEvaluations) {
@@ -97,7 +105,7 @@ public class PForwardSearchValueIteration extends ValueIteration {
         m_lCPUTimeTotal = 0;
 
         sMsg = "Starting " + getName() + " target ADR = " + round(dTargetValue, 3);
-        Logger.getInstance().log("FSVI", 0, "VI", sMsg);
+        Logger.getInstance().log("PFSVI", 0, "VI", sMsg);
 
         //initStartStateArray();
         m_pComputedADRs = new Pair();
@@ -127,24 +135,24 @@ public class PForwardSearchValueIteration extends ValueIteration {
                 try {
                     sMsg = "G: - operations " + AlphaVector.getGComputationsCount() + " avg time " +
                             AlphaVector.getAvgGTime();
-                    Logger.getInstance().log("FSVI", 0, "VI", sMsg);
+                    Logger.getInstance().log("PFSVI", 0, "VI", sMsg);
 
                     if (m_pPOMDP.isFactored() && ((FactoredPOMDP) m_pPOMDP).getBeliefType() == BeliefType.Factored) {
                         sMsg = "Tau: - operations " + FactoredBeliefState.getTauComputationCount() + " avg time " +
                                 FactoredBeliefState.getAvgTauTime();
-                        Logger.getInstance().log("FSVI", 0, "VI", sMsg);
+                        Logger.getInstance().log("PFSVI", 0, "VI", sMsg);
 
                     } else {
                         sMsg = "Tau: - operations " + m_pPOMDP.getBeliefStateFactory().getTauComputationCount() + " avg time " +
                                 m_pPOMDP.getBeliefStateFactory().getAvgTauTime();
-                        Logger.getInstance().log("FSVI", 0, "VI", sMsg);
+                        Logger.getInstance().log("PFSVI", 0, "VI", sMsg);
                     }
                     sMsg = "dot product - avg time = " + AlphaVector.getCurrentDotProductAvgTime();
-                    Logger.getInstance().log("FSVI", 0, "VI", sMsg);
+                    Logger.getInstance().log("PFSVI", 0, "VI", sMsg);
                     sMsg = "avg belief state size " + m_pPOMDP.getBeliefStateFactory().getAvgBeliefStateSize();
-                    Logger.getInstance().log("FSVI", 0, "VI", sMsg);
+                    Logger.getInstance().log("PFSVI", 0, "VI", sMsg);
                     sMsg = "avg alpha vector size " + m_vValueFunction.getAvgAlphaVectorSize();
-                    Logger.getInstance().log("FSVI", 0, "VI", sMsg);
+                    Logger.getInstance().log("PFSVI", 0, "VI", sMsg);
                     AlphaVector.initCurrentDotProductCount();
                 } catch (Exception e) {
                     Logger.getInstance().logln(e);
@@ -158,7 +166,7 @@ public class PForwardSearchValueIteration extends ValueIteration {
                 cStepsWithoutChanges = 0;
                 bDone |= checkADRConvergence(m_pPOMDP, dTargetValue, pComputedADRs);
 
-                sMsg = "FSVI: Iteration " + iIteration +
+                sMsg = "PFSVI: Iteration " + iIteration +
                         " |Vn| = " + m_vValueFunction.size() +
                         " simulated ADR " + round(((Number) pComputedADRs.first()).doubleValue(), 3) +
                         " filtered ADR " + round(((Number) pComputedADRs.second()).doubleValue(), 3) +
@@ -177,7 +185,7 @@ public class PForwardSearchValueIteration extends ValueIteration {
                         " free " + rtRuntime.freeMemory() / 1000000 +
                         " max " + rtRuntime.maxMemory() / 1000000 +
                         "";
-                Logger.getInstance().log("FSVI", 0, "VI", sMsg);
+                Logger.getInstance().log("PFSVI", 0, "VI", sMsg);
             } else {
                 if (cVnChanges == m_vValueFunction.getChangesCount()) {
                     cStepsWithoutChanges++;
@@ -185,7 +193,7 @@ public class PForwardSearchValueIteration extends ValueIteration {
                     //	bDone = true;
                     //}
                 }
-                sMsg = "FSVI: Iteration " + iIteration +
+                sMsg = "PFSVI: Iteration " + iIteration +
                         " |Vn| = " + m_vValueFunction.size() +
                         " time " + (lCurrentTime - lStartTime) / 1000 +
                         " V changes " + m_vValueFunction.getChangesCount() +
@@ -201,7 +209,7 @@ public class PForwardSearchValueIteration extends ValueIteration {
                         " free " + rtRuntime.freeMemory() / 1000000 +
                         " max " + rtRuntime.maxMemory() / 1000000 +
                         "";
-                Logger.getInstance().log("FSVI", 0, "VI", sMsg);
+                Logger.getInstance().log("PFSVI", 0, "VI", sMsg);
 
 
             }
@@ -218,7 +226,7 @@ public class PForwardSearchValueIteration extends ValueIteration {
                 " backups = " + m_cBackups +
                 " GComputations = " + AlphaVector.getGComputationsCount() +
                 " Dot products = " + m_cDotProducts;
-        Logger.getInstance().log("FSVI", 0, "VI", sMsg);
+        Logger.getInstance().log("PFSVI", 0, "VI", sMsg);
     }
 
     protected double forwardSearch(int iState, BeliefState bsCurrent, int iDepth) {
@@ -241,6 +249,9 @@ public class PForwardSearchValueIteration extends ValueIteration {
             iNextState = selectNextState(iState, iHeuristicAction);
             iObservation = getObservation(iState, iHeuristicAction, iNextState);
             bsNext = bsCurrent.nextBeliefState(iHeuristicAction, iObservation);
+            if (iObservation > 1) {
+                vBeliefPoints.add(bsNext);
+            }
 
             if (bsNext == null || bsNext.equals(bsCurrent)) {
                 m_iDepth = iDepth;
@@ -280,7 +291,34 @@ public class PForwardSearchValueIteration extends ValueIteration {
 
         return Math.max(dDelta, dNextDelta);
     }
+    protected BeliefStateVector<BeliefState> expandPBVI(BeliefStateVector<BeliefState> vBeliefPoints) {
+        //扩充后的B，原先的B中内容已经在这里
+        BeliefStateVector<BeliefState> vExpanded = new BeliefStateVector<BeliefState>(vBeliefPoints);
+        Iterator it = vBeliefPoints.iterator();
+        //临时变量，存放当前用来扩充的b
+        BeliefState bsCurrent = null;
+        //临时变量，存放得到的最远b
+        BeliefState bsNext = null;
 
+        //设置不需要缓存b
+        boolean bPrevious = m_pPOMDP.getBeliefStateFactory().cacheBeliefStates(false);
+        //每次扩充100个b
+        int beliefsize = vBeliefPoints.size() + 100 < vBeliefPoints.size() * 2 ? vBeliefPoints.size() + 100 : vBeliefPoints.size() * 2;
+        while (vExpanded.size() < beliefsize) {
+            //是从扩充后B中随机取个b，计算它的最远后继！！和标准PBVI中expand不同
+            //一个原因：保证能够扩充100个b
+            bsCurrent = vExpanded.elementAt(m_rndGenerator.nextInt(vExpanded.size()));
+
+            //计算最远的后继
+            bsNext = m_pPOMDP.getBeliefStateFactory().computeLimitedFarthestSuccessor(vBeliefPoints, bsCurrent, iterations, m_vfUpperBound, m_vValueFunction, m_dEpsilon, gamma, threshold);
+            if ((bsNext != null) && (!vExpanded.contains(bsNext)))
+                vExpanded.add(bsCurrent, bsNext);
+        }
+        //设置回原来的值，是否要缓存b
+        m_pPOMDP.getBeliefStateFactory().cacheBeliefStates(bPrevious);
+
+        return vExpanded;
+    }
     private boolean isTerminalState(int iState) {
         return m_pPOMDP.isTerminalState(iState);
     }

@@ -29,14 +29,16 @@ import org.xml.sax.SAXException;
 import pomdp.environments.POMDP;
 import pomdp.utilities.distance.DistanceMetric;
 import pomdp.utilities.distance.L1Distance;
+import pomdp.valuefunction.JigSawValueFunction;
+import pomdp.valuefunction.LinearValueFunctionApproximation;
 
 public class BeliefStateFactory{
 
 	protected POMDP m_pPOMDP;
 	public int m_cBeliefUpdates = 0;
 	/*
-	 * m_bCacheBeliefStatesÎªtrueÊ±£¬
-	 * ¸÷ÖÖ¼ÆËã³öÀ´µÄb£¬¶¼»áÔÚÕâÀï»º´æ×Å¡£
+	 * m_bCacheBeliefStatesÎªtrueÊ±ï¿½ï¿½
+	 * ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½bï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï»ºï¿½ï¿½ï¿½Å¡ï¿½
 	 */
 	protected TreeMap<BeliefState,BeliefState> m_hmCachedBeliefStates;
 	protected int m_cDiscretizationLevels;
@@ -87,6 +89,52 @@ public class BeliefStateFactory{
 		return BeliefStateComparator.getInstance( dEpsilon );
 	}
 
+	public BeliefState computeLimitedFarthestSuccessor(Vector<BeliefState> vBeliefPoints, BeliefState bs, int iterations, JigSawValueFunction m_vfUpperBound, LinearValueFunctionApproximation m_vValueFunction, double m_dEpsilon, double gamma, double threshold) {
+
+		int cObservations = m_pPOMDP.getObservationCount();
+		int cActions = m_pPOMDP.getActionCount();
+
+		int iAction = 0, iObservation = 0;
+		BeliefState bsMaxDist = null, bsNext = null;
+		double dMaxDist = 0.0, dDist = 0.0, dOb = 0.0;
+
+		//Logger.getInstance().logln( "expand " + vCurrent + ", " + bs );
+
+		//éšæœºå–ä¸€ä¸ªaï¼ï¼
+//		iAction = m_rndGenerator.nextInt( m_pPOMDP.getActionCount() );
+
+		//éå†o
+		for (iAction = 0; iAction < cActions; iAction++) {
+			for (iObservation = 0; iObservation < cObservations; iObservation++) {
+				//è®¡ç®—bã€aæ—¶ï¼Œäº§ç”Ÿè¿™ä¸ªoçš„æ¦‚ç‡
+				dOb = bs.probabilityOGivenA(iAction, iObservation);
+				if (dOb > 0.0) {
+					//è®¡ç®—bã€aã€oæ—¶ï¼Œåç»§b
+					bsNext = bs.nextBeliefState(iAction, iObservation);
+					if (bsNext != null) {
+						dDist = distance(vBeliefPoints, bsNext);
+						//Logger.getInstance().logln( "Distance " + vBeliefPoints + ", " + bsNext + " = " + dDist );
+
+						//è®¡ç®—bsNextä¸Šä¸‹ç•Œçš„å·®å€¼
+						double dUpperValue = 0.0, dLowerValue = 0.0, dWidth = 0.0;
+						dUpperValue = m_vfUpperBound.valueAt(bsNext);
+						dLowerValue = m_vValueFunction.valueAt(bsNext);
+						dWidth = dUpperValue - dLowerValue;
+
+						//å¢åŠ å¯¹bsNextä¸Šä¸‹ç•Œçš„å·®å€¼æ˜¯å¦å¤§äºm_dEpsilon/gammaçš„tæ¬¡æ–¹
+						if (dWidth > (m_dEpsilon / Math.pow(gamma, iterations)) && dDist > dMaxDist) {
+							//Logger.getInstance().logln( "New maximal" );
+							dMaxDist = dDist;
+							bsMaxDist = bsNext;
+						}
+					}
+				}
+			}
+		}
+		if (dMaxDist == 0.0)
+			return null;
+		return bsMaxDist;
+	}
 	//b_a,o(s') = O(a,s',o)\sum_s tr(s,a,s')b(s)
 	protected double nextBeliefValue( BeliefState bs, int iAction, int iEndState, int iObservation ){
 		double dProb = 0.0, dO = 0.0, dTr = 0.0, dBelief = 0.0;
@@ -617,7 +665,7 @@ public class BeliefStateFactory{
 		Logger.getInstance().logln( "Done computing belief state neighbors. avg " + cNeighbors / cElements );
 	}
 
-	//»ñµÃËùÓĞ×´Ì¬¸ÅÂÊÖµ¶¼Ò»ÑùµÄb
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½b
 	public BeliefState getUniformBeliefState(){
 		if( m_bsUniformState == null ){
 			int iState = 0, cStates = m_pPOMDP.getStateCount();
@@ -746,9 +794,9 @@ public class BeliefStateFactory{
 
 	
 	/**
-	 * actionÊÇËæ»úÈ¡Ò»¸ö£¬oÊÇÈ«±éÀúµÄ
-	 * @param vBeliefPoints ÓÃÀ´¼ÆËã¾àÀëµÄ
-	 * @param bs µ±Ç°b
+	 * actionï¿½ï¿½ï¿½ï¿½ï¿½È¡Ò»ï¿½ï¿½ï¿½ï¿½oï¿½ï¿½È«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	 * @param vBeliefPoints ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	 * @param bs ï¿½ï¿½Ç°b
 	 * @return
 	 */
 	public BeliefState computeRandomFarthestSuccessor( Vector<BeliefState> vBeliefPoints, BeliefState bs ){
@@ -760,14 +808,14 @@ public class BeliefStateFactory{
 
 		//Logger.getInstance().logln( "expand " + vCurrent + ", " + bs );
 
-		//Ëæ»úÈ¡Ò»¸öa£¡£¡
+		//ï¿½ï¿½ï¿½È¡Ò»ï¿½ï¿½aï¿½ï¿½ï¿½ï¿½
 		iAction = m_rndGenerator.nextInt( m_pPOMDP.getActionCount() );
-		//±éÀúo
+		//ï¿½ï¿½ï¿½ï¿½o
 		for( iObservation = 0 ; iObservation < cObservations ; iObservation++ ){
-			//¼ÆËãb¡¢aÊ±£¬²úÉúÕâ¸öoµÄ¸ÅÂÊ
+			//ï¿½ï¿½ï¿½ï¿½bï¿½ï¿½aÊ±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½oï¿½Ä¸ï¿½ï¿½ï¿½
 			dOb = bs.probabilityOGivenA( iAction, iObservation );
 			if( dOb > 0.0 ){
-				//¼ÆËãb¡¢a¡¢oÊ±£¬ºó¼Ìb
+				//ï¿½ï¿½ï¿½ï¿½bï¿½ï¿½aï¿½ï¿½oÊ±ï¿½ï¿½ï¿½ï¿½ï¿½b
 				bsNext = bs.nextBeliefState( iAction, iObservation );
 				if( bsNext != null ){
 					dDist = distance( vBeliefPoints, bsNext );

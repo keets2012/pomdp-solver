@@ -48,57 +48,60 @@ import pomdp.utilities.concurrent.ThreadPool;
 import pomdp.utilities.datastructures.Function;
 import pomdp.utilities.datastructures.MapFunction;
 import pomdp.utilities.datastructures.TabularFunction;
+import pomdp.utilities.distance.DistanceMetric;
+import pomdp.utilities.distance.L1Distance;
 import pomdp.utilities.factored.LogisticsBeliefStateFactory;
 import pomdp.utilities.visualisation.RockSampleVisualisationUnit;
 import pomdp.utilities.visualisation.VisualisationUnit;
+import pomdp.valuefunction.JigSawValueFunction;
 import pomdp.valuefunction.LinearValueFunctionApproximation;
 import pomdp.valuefunction.MDPValueFunction;
 
 public class POMDP implements Serializable {
     private static final long serialVersionUID = -231630700034970161L;
 
-    // ¸÷ÖÖÖØÒªµÄº¯Êý
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½Äºï¿½ï¿½ï¿½
     /*
-     * T:×´Ì¬×ªÒÆº¯Êý£¬sÏÂÖ´ÐÐaµ½s'µÄ¸ÅÂÊ
+     * T:×´Ì¬×ªï¿½Æºï¿½ï¿½ï¿½ï¿½ï¿½sï¿½ï¿½Ö´ï¿½ï¿½aï¿½ï¿½s'ï¿½Ä¸ï¿½ï¿½ï¿½
      */
     protected Function m_fTransition;
     /*
-     * R:»Ø±¨Öµº¯Êý£¬sÏÂÖ´ÐÐaµÄ»Ø±¨
+     * R:ï¿½Ø±ï¿½Öµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½sï¿½ï¿½Ö´ï¿½ï¿½aï¿½Ä»Ø±ï¿½
      */
     protected Function m_fReward;
     /*
-     * O:aºóµÃµ½sÊ±£¬¹Û²ìµ½oµÄ¸ÅÂÊ
+     * O:aï¿½ï¿½Ãµï¿½sÊ±ï¿½ï¿½ï¿½Û²ìµ½oï¿½Ä¸ï¿½ï¿½ï¿½
      */
     protected Function m_fObservation;
     /*
-     * b.:³õÊ¼Ê±£¬¸÷×´Ì¬µÄ¸ÅÂÊ
+     * b.:ï¿½ï¿½Ê¼Ê±ï¿½ï¿½ï¿½ï¿½×´Ì¬ï¿½Ä¸ï¿½ï¿½ï¿½
      */
     protected Function m_fStartState;
 
     /*
      * S
      */
-    // ´æ´¢×´Ì¬ºÍ¶ÔÓ¦indexºÅ
+    // ï¿½æ´¢×´Ì¬ï¿½Í¶ï¿½Ó¦indexï¿½ï¿½
     protected Vector<String> m_vStateNames;
-    // ´æ´¢×´Ì¬
+    // ï¿½æ´¢×´Ì¬
     protected Map<String, Integer> m_mStates;
     /*
      * A
      */
-    // ´æ´¢¶¯×÷ºÍ¶ÔÓ¦indexºÅ
+    // ï¿½æ´¢ï¿½ï¿½ï¿½ï¿½ï¿½Í¶ï¿½Ó¦indexï¿½ï¿½
     protected Map<String, Integer> m_mActionIndexes;
-    // ´æ´¢¶¯×÷Ãû³Æ
+    // ï¿½æ´¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     protected Vector<String> m_vActionNames;
     /*
-     * ¦¸
+     * ï¿½ï¿½
      */
-    // ´æ´¢¹Û²ìÖµºÍ¶ÔÓ¦µÄindexºÅ
+    // ï¿½æ´¢ï¿½Û²ï¿½Öµï¿½Í¶ï¿½Ó¦ï¿½ï¿½indexï¿½ï¿½
     protected Map<String, Integer> m_mObservations;
-    // ¸÷²ÎÊýµÄ¸öÊýÍ³¼Æ
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¸ï¿½ï¿½ï¿½Í³ï¿½ï¿½
     protected int m_cStates;
     protected int m_cActions;
     protected int m_cObservations;
-    // ÕÛ¿Û²ÎÊý
+    // ï¿½Û¿Û²ï¿½ï¿½ï¿½
     protected double m_dGamma; // discount factor
 
     protected static String g_sNewline = System.getProperty("line.separator");
@@ -107,7 +110,7 @@ public class POMDP implements Serializable {
     protected Vector<Integer> m_vTerminalStates;
     protected Vector<Integer> m_vObservationStates;
     protected double[][] m_adStoredRewards;
-    // ±£´æÃ¿¸ö¶¯×÷µÄ×îÐ¡»Ø±¨Öµ
+    // ï¿½ï¿½ï¿½ï¿½Ã¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¡ï¿½Ø±ï¿½Öµ
     protected double[] m_adMinActionRewards;
     protected final static double MAX_INF = Double.POSITIVE_INFINITY;
     protected final static double MIN_INF = Double.NEGATIVE_INFINITY;
@@ -121,7 +124,7 @@ public class POMDP implements Serializable {
     protected BeliefStateFactory m_bsFactory;
     protected MDPValueFunction m_vfMDP;
     protected double m_dMinReward;
-    //Ã»ÓÐÊ¹ÓÃ
+    //Ã»ï¿½ï¿½Ê¹ï¿½ï¿½
     protected VisualisationUnit m_vVisualisationUnit;
 
     public enum RewardType {
@@ -170,10 +173,10 @@ public class POMDP implements Serializable {
 
     public void load(String sFileName) throws IOException,
             InvalidModelFileFormatException {
-        // È¡Ä£ÐÍÃû×Ö
+        // È¡Ä£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         m_sName = sFileName.substring(sFileName.lastIndexOf("/") + 1, sFileName
                 .lastIndexOf("."));
-        // ´ÓÎÄ¼þÖÐ¼ÓÔØ
+        // ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½Ð¼ï¿½ï¿½ï¿½
         POMDPLoader p = new POMDPLoader(this);
         p.load(sFileName);
         if (m_rtReward == RewardType.StateActionState)
@@ -215,7 +218,7 @@ public class POMDP implements Serializable {
     }
 
     /**
-     * T Function£¬ÇóÒ»¸ö×ª»»µÄ¸ÅÂÊ
+     * T Functionï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½×ªï¿½ï¿½ï¿½Ä¸ï¿½ï¿½ï¿½
      * @param iState1
      * @param iAction
      * @param iState2
@@ -286,7 +289,7 @@ public class POMDP implements Serializable {
 
                 dSumReward = m_fReward.valueAt(iStartState, iAction);
                 if (dSumReward == 0) {
-                    //Èç¹û°´½áÊø×´Ì¬Çø·Ö»Ø±¨Öµ£¬Ôò°´¸ÅÂÊÇóºÍ
+                    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬ï¿½ï¿½ï¿½Ö»Ø±ï¿½Öµï¿½ï¿½ï¿½ò°´¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
                     itNonZeroEntries = m_fReward.getNonZeroEntries(iStartState,
                             iAction);
                     if (itNonZeroEntries != null) {
@@ -453,7 +456,7 @@ public class POMDP implements Serializable {
     }
 
     /**
-     * Ä£ÄâÒ»¸öÖ´ÐÐ£º¿ªÊ¼×´Ì¬+¶¯×÷£¬°´ÕÕT FunctionÖ´ÐÐ£»°´¸ÅÂÊÑ¡³öÏÂÒ»¸ö×´Ì¬
+     * Ä£ï¿½ï¿½Ò»ï¿½ï¿½Ö´ï¿½Ð£ï¿½ï¿½ï¿½Ê¼×´Ì¬+ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½T FunctionÖ´ï¿½Ð£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½×´Ì¬
      *
      * @param iAction
      * @param iState
@@ -477,7 +480,7 @@ public class POMDP implements Serializable {
     }
 
     /**
-     * Ä£ÄâµÃµ½µÄ¹Û²ìÖµ
+     * Ä£ï¿½ï¿½Ãµï¿½ï¿½Ä¹Û²ï¿½Öµ
      * @param iAction
      * @param iState
      * @return
@@ -537,7 +540,7 @@ public class POMDP implements Serializable {
 
 
     /**
-     * Ä£ÄâcTests´Î£»Ã¿´ÎÄ£ÄâÖ´ÐÐcMaxStepsToGoal²½£¬²¢¼ÆËã³ö±¾´ÎÄ£ÄâµÄÕÛ¿Û»Ø±¨Öµ£»È»ºóÊä³ö¡¢·µ»ØÆ½¾ùÕÛ¿Û»Ø±¨Öµ
+     * Ä£ï¿½ï¿½cTestsï¿½Î£ï¿½Ã¿ï¿½ï¿½Ä£ï¿½ï¿½Ö´ï¿½ï¿½cMaxStepsToGoalï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä£ï¿½ï¿½ï¿½ï¿½Û¿Û»Ø±ï¿½Öµï¿½ï¿½È»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ½ï¿½ï¿½ï¿½Û¿Û»Ø±ï¿½Öµ
      * @param cTests
      * @param cMaxStepsToGoal
      * @param policy
@@ -585,7 +588,7 @@ public class POMDP implements Serializable {
             }
         } else {
             m_cSteps = 0;
-            //¼ÆËãcTests´ÎÄ£ÄâÕÛ¿Û»Ø±¨£¬È»ºó¼ÆËãÆ½¾ùÖµ
+            //ï¿½ï¿½ï¿½ï¿½cTestsï¿½ï¿½Ä£ï¿½ï¿½ï¿½Û¿Û»Ø±ï¿½ï¿½ï¿½È»ï¿½ï¿½ï¿½ï¿½ï¿½Æ½ï¿½ï¿½Öµ
             for (iTest = 0; (iTest < cTests) && (dStandardError > 0.01 * dADR); iTest++) {
                 dDiscountedReward = computeDiscountedReward(cMaxStepsToGoal,
                         policy, aiActionCount);
@@ -1275,14 +1278,14 @@ public class POMDP implements Serializable {
     BeliefStateFactory bsf = null;
 
     /**
-     * Ä£ÄâÖ´ÐÐcMaxStepsToGoal²½£¬°´Ö¸¶¨µÄ²ßÂÔºÍÆðÊ¼×´Ì¬¸ÅÂÊ¼°¸÷ÖÖº¯Êý£¬¼ÆËã³öÕÛ¿Û»Ø±¨
+     * Ä£ï¿½ï¿½Ö´ï¿½ï¿½cMaxStepsToGoalï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½Ä²ï¿½ï¿½Ôºï¿½ï¿½ï¿½Ê¼×´Ì¬ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½Öºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Û¿Û»Ø±ï¿½
      * R + yR + y2R + y3R + ...
      *
      * @param cMaxStepsToGoal
      * @param policy
      * @param vObservedBeliefPoints
      * @param bExplore
-     * @param aiActionCount ¼ÇÂ¼¸÷¶¯×÷µÄÖ´ÐÐ´ÎÊý
+     * @param aiActionCount ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½Ð´ï¿½ï¿½ï¿½
      * @return
      */
     public double computeDiscountedRewardII(int cMaxStepsToGoal,
@@ -1333,12 +1336,12 @@ public class POMDP implements Serializable {
                 vObservedBeliefPoints.add(bsCurrentBelief);
             }
 
-            //Ä£ÄâÖ´ÐÐ£¬»ñµÃÏÂÒ»¸ö×´Ì¬
+            //Ä£ï¿½ï¿½Ö´ï¿½Ð£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½×´Ì¬
             iNextState = execute(iAction, iState);
-            //Ä£Äâ³ö¹Û²ìÖµ
+            //Ä£ï¿½ï¿½ï¿½ï¿½Û²ï¿½Öµ
             iObservation = observe(iAction, iNextState);
 
-            //»ñµÃÏàÓ¦µÄÁ¢¼´»Ø±¨
+            //ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø±ï¿½
             if (m_rtReward == RewardType.StateAction)
                 dCurrentReward = R(iState, iAction); // R(s,a)
             else if (m_rtReward == RewardType.StateActionState)
@@ -1351,12 +1354,12 @@ public class POMDP implements Serializable {
             if (dCurrentReward != 0)
                 cRewards++;
 
-            //Èô½áÊøÁË£¬»¹ÊÇ»á¼ÌÐøÖ´ÐÐµ½cMaxStepsToGoal²½£¬µ«ÊÇÕÛ¿ÛÒò×ÓÎª0
+            //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë£ï¿½ï¿½ï¿½ï¿½Ç»ï¿½ï¿½ï¿½ï¿½Ö´ï¿½Ðµï¿½cMaxStepsToGoalï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Û¿ï¿½ï¿½ï¿½ï¿½ï¿½Îª0
             bDone = endADR(iNextState, dCurrentReward);
             if (bDone)
                 dDiscountFactor = 0.0;
 
-            //¼ÆËã³öÏÂÒ»¸öÐÅÄîµã
+            //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             bsNext = bsCurrentBelief.nextBeliefState(iAction, iObservation);
 
             if (iState != iNextState)
@@ -1638,7 +1641,7 @@ public class POMDP implements Serializable {
     }
 
     /**
-     * ÅÐ¶ÏÊÇ·ñ½áÊøADRµÄ¼ÆËã
+     * ï¿½Ð¶ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ADRï¿½Ä¼ï¿½ï¿½ï¿½
      * ADR: average discount reward
      * @param iState
      * @param dReward
@@ -1752,7 +1755,7 @@ public class POMDP implements Serializable {
     }
 
     /**
-     * Ä£ÄâÆðÊ¼×´Ì¬£»°´¸ÅÂÊÈ¡Ò»¸ö¿ªÊ¼×´Ì¬
+     * Ä£ï¿½ï¿½ï¿½ï¿½Ê¼×´Ì¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¡Ò»ï¿½ï¿½ï¿½ï¿½Ê¼×´Ì¬
      *
      * @return
      */
@@ -1826,7 +1829,7 @@ public class POMDP implements Serializable {
     }
 
     /**
-     * »ñµÃºÍ¿ªÊ¼×´Ì¬ºÍ¶¯×÷ÓÐ¹ØµÄ¸ÅÂÊ·Ç0µÄ×ª»»
+     * ï¿½ï¿½ÃºÍ¿ï¿½Ê¼×´Ì¬ï¿½Í¶ï¿½ï¿½ï¿½ï¿½Ð¹ØµÄ¸ï¿½ï¿½Ê·ï¿½0ï¿½ï¿½×ªï¿½ï¿½
      *
      * @param iStartState
      * @param iAction
@@ -2132,7 +2135,7 @@ public class POMDP implements Serializable {
     }
 
     /**
-     * ¸ù¾Ý×´Ì¬¡¢¶¯×÷¡¢¹Û²ìÖµµÄÊýÁ¿³õÊ¼»¯¸÷¡°º¯Êý¡± Ö÷ÒªÊÇ³õÊ¼»¯¡°º¯ÊýÀà¡±ÀïÃæµÄÊý¾Ý½á¹¹µÄ³¤¶È
+     * ï¿½ï¿½ï¿½ï¿½×´Ì¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Û²ï¿½Öµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Òªï¿½Ç³ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½à¡±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý½á¹¹ï¿½Ä³ï¿½ï¿½ï¿½
      */
     public void initDynamicsFunctions() {
         int[] aDims = new int[3];

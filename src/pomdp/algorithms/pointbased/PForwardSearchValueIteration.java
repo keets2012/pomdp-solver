@@ -57,6 +57,7 @@ public class PForwardSearchValueIteration extends ValueIteration {
     protected double maxADR = -Integer.MAX_VALUE; //当前最大ADR
 
     protected long maxExecutionTime = 20 * 60; //20min,秒
+
     public enum HeuristicType {
         MDP, ObservationAwareMDP, DeterministicTransitionsPOMDP, DeterministicObservationsPOMDP, DeterministicPOMDP, LimitedBeliefMDP, HeuristicPolicy
     }
@@ -188,6 +189,7 @@ public class PForwardSearchValueIteration extends ValueIteration {
         Logger.getInstance().logln("Finished " + " - time : " + lCPUTimeTotal / 1000000000 + "seconds" + " |BS| = " + vBeliefPoints.size() +
                 " |V| = " + m_vValueFunction.size());
     }
+
     public void valueIteration(int cMaxSteps, double dEpsilon, double dTargetValue, int maxRunningTime, int numEvaluations) {
 
         //public void valueIteration( int cMaxSteps, double dEpsilon, double dTargetValue ){
@@ -330,7 +332,7 @@ public class PForwardSearchValueIteration extends ValueIteration {
         Logger.getInstance().log("PFSVI", 0, "VI", sMsg);
     }
 
-    protected double forwardSearch(int iState, BeliefState bsCurrent, int iDepth) {
+    protected double forwardSearch(int iState, BeliefState bsCurrent, BeliefState initBs, int iDepth) {
         double dDelta = 0.0, dNextDelta = 0.0;
         int iNextState = 0, iHeuristicAction = 0, iPOMDPAction = 0, iObservation = 0;
         BeliefState bsNext = null;
@@ -345,7 +347,8 @@ public class PForwardSearchValueIteration extends ValueIteration {
             m_iDepth = iDepth;
             Logger.getInstance().logln("Ended at depth " + iDepth + ". isTerminalState(" + iState + ")=" + isTerminalState(iState));
         } else {
-            iHeuristicAction = getAction(iState, bsCurrent);
+//            iHeuristicAction = getAction(iState, bsCurrent);
+            iHeuristicAction = getAction(iState, initBs);
 
             iNextState = selectNextState(iState, iHeuristicAction);
             iObservation = getObservation(iState, iHeuristicAction, iNextState);
@@ -362,7 +365,7 @@ public class PForwardSearchValueIteration extends ValueIteration {
                 if (bsNext.valueAt(iNextState) == 0.0) {
                     bsNext = bsCurrent.nextBeliefState(iHeuristicAction, iObservation);
                 }
-                dNextDelta = forwardSearch(iNextState, bsNext, iDepth + 1);
+                dNextDelta = forwardSearch(iNextState, bsNext, initBs, iDepth + 1);
             }
         }
 
@@ -392,6 +395,7 @@ public class PForwardSearchValueIteration extends ValueIteration {
 
         return Math.max(dDelta, dNextDelta);
     }
+
     protected BeliefStateVector<BeliefState> expandPBVI(BeliefStateVector<BeliefState> vBeliefPoints) {
         //扩充后的B，原先的B中内容已经在这里
         BeliefStateVector<BeliefState> vExpanded = new BeliefStateVector<BeliefState>(vBeliefPoints);
@@ -420,6 +424,7 @@ public class PForwardSearchValueIteration extends ValueIteration {
 
         return vExpanded;
     }
+
     private boolean isTerminalState(int iState) {
         return m_pPOMDP.isTerminalState(iState);
     }
@@ -431,7 +436,7 @@ public class PForwardSearchValueIteration extends ValueIteration {
     private int getAction(int iState, BeliefState bs) {
         if (m_htType == HeuristicType.MDP) {
             if (m_rndGenerator.nextDouble() < 0.9)
-                return m_vfMDP.getAction(iState);
+                return m_vfMDP.getPriAction(iState, bs);
             return m_rndGenerator.nextInt(m_cActions);
         } else if (m_htType == HeuristicType.HeuristicPolicy) {
             return m_hpPolicy.getBestAction(iState, bs);
@@ -615,7 +620,7 @@ public class PForwardSearchValueIteration extends ValueIteration {
         Logger.getInstance().logln("Starting at state " + m_pPOMDP.getStateName(iInitialState));
         m_iDepth = 0;
         Logger.getInstance().logln("Begin improve");
-        double dDelta = forwardSearch(iInitialState, bsInitial, 0);
+        double dDelta = forwardSearch(iInitialState, bsInitial, bsInitial, 0);
         Logger.getInstance().logln("End improve, |V| = " +
                 m_vValueFunction.size() + ", delta = " + dDelta);
         return dDelta;

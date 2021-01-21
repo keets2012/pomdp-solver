@@ -119,6 +119,7 @@ public class ForwardSearchValueIteration extends ValueIteration {
             m_lLatestADRCheck = lCPUTimeBefore;
             m_cTimeInADR = 0;
             m_lIterationStartTime = lCPUTimeBefore;
+            // dMaxDelta
             dMaxDelta = improveValueFunction();
             lCPUTimeAfter = JProf.getCurrentThreadCpuTimeSafe();
             lCurrentTime = System.currentTimeMillis();
@@ -299,7 +300,7 @@ public class ForwardSearchValueIteration extends ValueIteration {
     private int getAction(int iState, BeliefState bs) {
         if (m_htType == HeuristicType.MDP) {
             if (m_rndGenerator.nextDouble() < 0.9)
-                return m_vfMDP.getAction(iState);
+                return m_vfMDP.getPriAction(iState);
             return m_rndGenerator.nextInt(m_cActions);
         } else if (m_htType == HeuristicType.HeuristicPolicy) {
             return m_hpPolicy.getBestAction(iState, bs);
@@ -398,6 +399,7 @@ public class ForwardSearchValueIteration extends ValueIteration {
         do {
             iInitialState = m_pPOMDP.chooseStartState();
         } while (m_pPOMDP.isTerminalState(iInitialState));
+
         BeliefState bsInitial = m_pPOMDP.getBeliefStateFactory().getInitialBeliefState();
         Logger.getInstance().logln("Starting at state " + m_pPOMDP.getStateName(iInitialState));
         m_iDepth = 0;

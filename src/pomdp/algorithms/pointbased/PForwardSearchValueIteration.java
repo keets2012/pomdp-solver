@@ -13,8 +13,10 @@ import pomdp.utilities.JProf;
 import pomdp.utilities.Logger;
 import pomdp.utilities.Pair;
 import pomdp.utilities.factored.FactoredBeliefState;
+import pomdp.valuefunction.JigSawValueFunction;
 import pomdp.valuefunction.LinearValueFunctionApproximation;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map.Entry;
 import java.util.SortedMap;
@@ -37,6 +39,24 @@ public class PForwardSearchValueIteration extends ValueIteration {
     //初始化信念点集合B
     BeliefStateVector<BeliefState> vBeliefPoints = new BeliefStateVector<BeliefState>();
 
+    protected Iterator<BeliefState> m_itCurrentIterationPoints;
+    protected boolean m_bSingleValueFunction = true;
+    protected boolean m_bRandomizedActions;
+    protected double m_dFilteredADR = 0.0;
+    protected JigSawValueFunction m_vfUpperBound;
+
+    double gamma = 0.95;  //折扣因子
+    protected int maxIterations = 500;  //规定最多迭代次数
+    protected int iterations = 0; //当前迭代次数
+    protected double minWidth = Double.MAX_VALUE; //本次迭代上下界的最小差值
+    protected double threshold = 0.0; //裁剪信念点的增加阈值
+    public static final double EPSILON = 0.5;
+    protected double SumDelta = 0.0;
+    protected double dDelta = 1.0;
+
+    protected double maxADR = -Integer.MAX_VALUE; //当前最大ADR
+
+    protected long maxExecutionTime = 20 * 60; //20min,秒
     public enum HeuristicType {
         MDP, ObservationAwareMDP, DeterministicTransitionsPOMDP, DeterministicObservationsPOMDP, DeterministicPOMDP, LimitedBeliefMDP, HeuristicPolicy
     }
@@ -55,9 +75,6 @@ public class PForwardSearchValueIteration extends ValueIteration {
     public PForwardSearchValueIteration(POMDP pomdp, HeuristicType htType) {
 
         super(pomdp);
-        //把b0加入B
-        /* initialize the list of belief points with the initial belief state */
-        vBeliefPoints.add(null, m_pPOMDP.getBeliefStateFactory().getInitialBeliefState());
 
         m_htType = htType;
         m_iDepth = 0;
@@ -83,10 +100,94 @@ public class PForwardSearchValueIteration extends ValueIteration {
             m_vfMDP = m_pPOMDP.getMDPValueFunction();
             m_vfMDP.valueIteration(1000, ExecutionProperties.getEpsilon());
         }
+        //把b0加入B
+        /* initialize the list of belief points with the initial belief state */
+        vBeliefPoints.add(null, m_pPOMDP.getBeliefStateFactory().getInitialBeliefState());
+
         lAfter = JProf.getCurrentThreadCpuTimeSafe();
         Logger.getInstance().log("PFSVI", 0, "initHeurisitc", "Initialization time was " + (lAfter - lBefore) / 1000000);
     }
 
+    public void NewIteration(POMDP pomdp) {
+        //收敛时间
+        long lCPUTimeBefore = 0, lCPUTimeAfter = 0, lCPUTimeTotal = 0;
+        Pair<Double, Double> pComputedADRs = new Pair<Double, Double>(new Double(0.0), new Double(0.0));
+        double width = 0.0;
+
+        //初始化信念点集合B
+        BeliefStateVector<BeliefState> vBeliefPoints = new BeliefStateVector<BeliefState>();
+
+        //把b0加入B
+        /* initialize the list of belief points with the initial belief state */
+        vBeliefPoints.add(null, m_pPOMDP.getBeliefStateFactory().getInitialBeliefState());
+
+        boolean isconvergence = false;
+        int cBeliefPoints = 0;
+
+        //开始迭代直至收敛
+        while (!isconvergence) {
+            //本次循环开始时间
+            lCPUTimeBefore = JProf.getCurrentThreadCpuTimeSafe();
+
+            cBeliefPoints = vBeliefPoints.size();
+            //更新前的信念点集
+            vBeliefPoints = expandPBVI(vBeliefPoints);  //点集的扩张，增加点扩张时条件的判断
+            if (vBeliefPoints.size() == cBeliefPoints) {
+                isconvergence = true;
+            }
+
+            //更新上界和下界，dDelta为下界更新前后最大的提升量
+            dDelta = improveValueFunction(vBeliefPoints);
+
+            iterations++;
+
+            //ADR
+            pComputedADRs = CalculateADRConvergence(m_pPOMDP, pComputedADRs);
+            if (((Number) pComputedADRs.first()).doubleValue() > maxADR) {
+                maxADR = ((Number) pComputedADRs.first()).doubleValue();
+            }
+
+            //本次循环结束时间
+            lCPUTimeAfter = JProf.getCurrentThreadCpuTimeSafe();
+            //本次循环使用时间
+            lCPUTimeTotal += (lCPUTimeAfter - lCPUTimeBefore);
+            if (iterations >= maxIterations || lCPUTimeTotal / 1000000000 >= maxExecutionTime) {
+                isconvergence = true;
+            }
+
+            Logger.getInstance().logln("Iteration: " + iterations +
+                    " |Vn|: = " + m_vValueFunction.size() +
+                    " |B|: = " + vBeliefPoints.size() +
+                    " Delta: = " + round(dDelta, 4) +
+                    " CurrentTotalTime: " + lCPUTimeTotal / 1000000000 + "seconds");
+
+            //在backup之后对信念点集进行裁剪
+            if (!isconvergence) {
+                for (int index = 0; index < vBeliefPoints.size(); index++) {
+                    width = width(vBeliefPoints.get(index));
+                    //计算本次迭代的最小上下界差值
+                    if (width < minWidth) {
+                        minWidth = width;
+                    }
+                    //裁剪去值函数更新后上下界差值小于阈值的信念点
+                    if (width < m_dEpsilon / Math.pow(gamma, iterations)) {
+                        vBeliefPoints.remove(index);
+                        index--;
+                    }
+                }
+                Logger.getInstance().logln(" Prune after backup |B|: " + vBeliefPoints.size());
+                Logger.getInstance().logln("minWidth: " + minWidth);
+                Logger.getInstance().logln("maxADR: " + maxADR);
+                Logger.getInstance().logln();
+            }
+            threshold = minWidth;
+
+            System.out.println("");
+        }
+
+        Logger.getInstance().logln("Finished " + " - time : " + lCPUTimeTotal / 1000000000 + "seconds" + " |BS| = " + vBeliefPoints.size() +
+                " |V| = " + m_vValueFunction.size());
+    }
     public void valueIteration(int cMaxSteps, double dEpsilon, double dTargetValue, int maxRunningTime, int numEvaluations) {
 
         //public void valueIteration( int cMaxSteps, double dEpsilon, double dTargetValue ){
@@ -423,6 +524,87 @@ public class PForwardSearchValueIteration extends ValueIteration {
         return iState;
     }
 
+
+    protected double improveValueFunction(BeliefStateVector vBeliefPoints) {
+        LinearValueFunctionApproximation vNextValueFunction = new LinearValueFunctionApproximation(m_dEpsilon, true);
+        BeliefState bsCurrent = null, bsMax = null;
+        AlphaVector avBackup = null, avNext = null, avCurrentMax = null;
+        double dMaxDelta = 1.0, dDelta = 0.0, dBackupValue = 0.0, dValue = 0.0;
+        double dMaxOldValue = 0.0, dMaxNewValue = 0.0;
+        int iBeliefState = 0;
+
+        double maxUpperDecline = 0.0, upperDecline = 0.0; //上界下降值
+        BeliefState upperState = null; //上界下降值最大的信念点
+
+        boolean bPrevious = m_pPOMDP.getBeliefStateFactory().cacheBeliefStates(false);
+
+        if (m_itCurrentIterationPoints == null)
+            m_itCurrentIterationPoints = vBeliefPoints.getTreeDownUpIterator();
+        dMaxDelta = 0.0;
+
+        //迭代所有的b
+        while (m_itCurrentIterationPoints.hasNext()) {
+            //当前的b
+            bsCurrent = (BeliefState) m_itCurrentIterationPoints.next();
+            //当前b对应的最大α
+            avCurrentMax = m_vValueFunction.getMaxAlpha(bsCurrent);
+            //backup操作后的α
+            avBackup = backup(bsCurrent);
+
+            //计算backup前后，该b点value之差
+            dBackupValue = avBackup.dotProduct(bsCurrent);
+            dValue = avCurrentMax.dotProduct(bsCurrent);
+            dDelta = dBackupValue - dValue;
+
+
+            if (dDelta > dMaxDelta) {
+                dMaxDelta = dDelta;
+                bsMax = bsCurrent;
+                dMaxOldValue = dValue;
+                dMaxNewValue = dBackupValue;
+            }
+
+            avNext = avBackup;
+
+            //如果有提升，才会增加新的α
+            if (dDelta >= 0) {
+                m_vValueFunction.addPrunePointwiseDominated(avBackup);
+                SumDelta += dDelta;
+            }
+
+            //更新上界
+            upperDecline = m_vfUpperBound.updateValue(bsCurrent);
+            //获得本次更新上界下降的最大值
+            if (upperDecline > maxUpperDecline) {
+                maxUpperDecline = upperDecline;
+                upperState = bsCurrent;
+            }
+
+            iBeliefState++;
+        }
+
+        if (m_bSingleValueFunction) {
+            Iterator it = vNextValueFunction.iterator();
+            while (it.hasNext()) {
+                avNext = (AlphaVector) it.next();
+                m_vValueFunction.addPrunePointwiseDominated(avNext);
+            }
+        }
+
+        if (!m_itCurrentIterationPoints.hasNext())
+            m_itCurrentIterationPoints = null;
+
+        Logger.getInstance().logln("Max lowBounddelta over " + bsMax +
+                " from " + round(dMaxOldValue, 3) +
+                " to " + round(dMaxNewValue, 3));
+
+        Logger.getInstance().logln("Max upperBounddelta over " + upperState +
+                " is " + round(maxUpperDecline, 3));
+
+        m_pPOMDP.getBeliefStateFactory().cacheBeliefStates(bPrevious);
+
+        return dMaxDelta;
+    }
 
     protected double improveValueFunction() {
         int iInitialState = -1;

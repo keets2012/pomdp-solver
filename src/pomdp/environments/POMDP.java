@@ -16,8 +16,10 @@ package pomdp.environments;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.AbstractCollection;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.SortedSet;
@@ -219,6 +221,7 @@ public class POMDP implements Serializable {
 
     /**
      * T Function����һ��ת���ĸ���
+     *
      * @param iState1
      * @param iAction
      * @param iState2
@@ -479,8 +482,69 @@ public class POMDP implements Serializable {
         return iNextState;
     }
 
+    public int execute(int iAction, int iState, BeliefState initBs) {
+        int iNextState = -1;
+        double dProb = m_rndGenerator.nextDouble();
+        double dTr = 0.0;
+        List<NextStatePri> priList = new ArrayList<>();
+        Iterator<Entry<Integer, Double>> itNonZero = getNonZeroTransitions(
+                iState, iAction);
+        Entry<Integer, Double> e = null;
+        while (itNonZero.hasNext()) {
+            priList.add(calculatePri(iAction, e, initBs));
+            e = itNonZero.next();
+            iNextState = e.getKey();
+            dTr = e.getValue();
+            dProb -= dTr;
+        }
+        int randomIndex = m_rndGenerator.nextInt(priList.size());
+        // assert iNextState >= 0 && iNextState < m_cStates;
+        return priList.get(randomIndex).getiState();
+    }
+
+    class NextStatePri {
+        double dValue;
+        int iState;
+
+        public NextStatePri(double dValue, int iState) {
+            this.dValue = dValue;
+            this.iState = iState;
+        }
+
+        public double getdValue() {
+            return dValue;
+        }
+
+        public void setdValue(double dValue) {
+            this.dValue = dValue;
+        }
+
+        public int getiState() {
+            return iState;
+        }
+
+        public void setiState(int iState) {
+            this.iState = iState;
+        }
+    }
+
+    private NextStatePri calculatePri(int iNum, Entry<Integer, Double> e, BeliefState initBs) {
+        double dValue = 0.0;
+        BeliefState bsCurrent = initBs, bsNext;
+//        for (int iStartState = 0; iStartState < this.getStateCount(); iStartState++) {
+        for (int iObservation = 0; iObservation < this.getObservationCount(); iObservation++) {
+
+            dValue = e.getValue() * bsCurrent.getApproximateValue();
+            bsNext = bsCurrent.nextBeliefState(iNum, iObservation);
+            bsCurrent = bsNext;
+        }
+//        }
+        return new NextStatePri(dValue, e.getKey());
+    }
+
     /**
      * ģ��õ��Ĺ۲�ֵ
+     *
      * @param iAction
      * @param iState
      * @return
@@ -541,6 +605,7 @@ public class POMDP implements Serializable {
 
     /**
      * ģ��cTests�Σ�ÿ��ģ��ִ��cMaxStepsToGoal���������������ģ����ۿۻر�ֵ��Ȼ�����������ƽ���ۿۻر�ֵ
+     *
      * @param cTests
      * @param cMaxStepsToGoal
      * @param policy
@@ -917,18 +982,18 @@ public class POMDP implements Serializable {
      * agent-environment interactions.
      *
      * @param cMaxStepsToGoal
-     *            - maximal steps per trial. Used if the policy causes the agent
-     *            to get stuck in a loop.
+     * - maximal steps per trial. Used if the policy causes the agent
+     * to get stuck in a loop.
      * @param policy
-     *            - specifies agent actions given belief states (POMDP policy).
+     * - specifies agent actions given belief states (POMDP policy).
      * @param vObservedBeliefPoints
-     *            - can store observed belief points. Set to null to avoid
-     *            storing.
+     * - can store observed belief points. Set to null to avoid
+     * storing.
      * @param bExplore
-     *            - specifies whther the agent explores.
+     * - specifies whther the agent explores.
      * @param aiActionCount
-     *            - counts the specific actions executed by the agent. Must be
-     *            of size |A|.
+     * - counts the specific actions executed by the agent. Must be
+     * of size |A|.
      * @return
      */
 
@@ -1285,7 +1350,7 @@ public class POMDP implements Serializable {
      * @param policy
      * @param vObservedBeliefPoints
      * @param bExplore
-     * @param aiActionCount ��¼��������ִ�д���
+     * @param aiActionCount         ��¼��������ִ�д���
      * @return
      */
     public double computeDiscountedRewardII(int cMaxStepsToGoal,
@@ -1643,6 +1708,7 @@ public class POMDP implements Serializable {
     /**
      * �ж��Ƿ����ADR�ļ���
      * ADR: average discount reward
+     *
      * @param iState
      * @param dReward
      * @return
@@ -1658,16 +1724,12 @@ public class POMDP implements Serializable {
      * underlying MDP. Simulates agent-environment interactions. Useful for
      * checking what is the upper bound a policy might reach.
      *
-     * @param cMaxStepsToGoal
-     *            - maximal steps per trial. Used if the policy causes the agent
-     *            to get stuck in a loop.
-     * @param policy
-     *            - specifies agent actions given states (MDP policy).
-     * @param bExplore
-     *            - specifies whther the agent explores.
-     * @param bMaintainBeliefStates
-     *            - specifies whether belief states are computed through the
-     *            trial.
+     * @param cMaxStepsToGoal - maximal steps per trial. Used if the policy causes the agent
+     *                        to get stuck in a loop.
+     * @param policy          - specifies agent actions given states (MDP policy).
+     * @param bExplore        - specifies whther the agent explores.
+     * @param -               specifies whether belief states are computed through the
+     *                        trial.
      * @return
      */
     public double computeMDPDiscountedReward(int cMaxStepsToGoal,
@@ -1998,10 +2060,8 @@ public class POMDP implements Serializable {
     /**
      * Computes the immediate reward for a belief state and a specific action
      *
-     * @param bs
-     *            - belief state
-     * @param iAction
-     *            - action index
+     * @param bs      - belief state
+     * @param iAction - action index
      * @return
      */
     public double immediateReward(BeliefState bs, int iAction) {

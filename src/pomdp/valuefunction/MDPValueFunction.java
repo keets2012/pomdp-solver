@@ -3,8 +3,10 @@ package pomdp.valuefunction;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Vector;
 import java.util.Map.Entry;
@@ -695,7 +697,7 @@ public class MDPValueFunction extends PolicyStrategy {
             if (m_rndGenerator.nextDouble() < m_dExplorationRate)
                 return m_rndGenerator.nextInt(m_cActions);
         }
-
+        List<ActionPri> priList = new ArrayList<>();
         if (m_avBestActions == null) {
             for (iAction = 0; iAction < m_cActions; iAction++) {
                 dQValue = getQValue(iState, iAction);
@@ -704,57 +706,63 @@ public class MDPValueFunction extends PolicyStrategy {
                     iMaxAction = iAction;
                 }
             }
+            for (iAction = 0; iAction < m_cActions; iAction++) {
+                dQValue = getQValue(iState, iAction);
+                if (dQValue == dMaxQValue) {
+                    iMaxAction = iAction;
+                    priList.add(calculatePri(iAction, initBs));
+                }
+            }
         } else {
             //iMaxAction = m_ivBestActions.elementAt( iState );
             iMaxAction = (int) m_avBestActions.valueAt(iState);
         }
-        double[][] adQFunction = new double[m_pPOMDP.getStateCount()][m_pPOMDP.getActionCount()];
-        for (int iStartState = 0; iStartState < m_pPOMDP.getStateCount(); iStartState++) {
-            for (iAction = 0; iAction < m_pPOMDP.getActionCount(); iAction++) {
-                //double dValue = vfMDP.getQValue(iStartState, iAction);
-                adQFunction[iStartState][iAction] = 0.0;
-                //adQFunction[iStartState][iAction] = dValue;
-            }
-        }
-        //adQFunction[iStartState][iAction] = 0.0;//dMaxR;
-        //m_adStateValues[iStartState] = vfMDP.getValue(iStartState);
-        return iMaxAction;
+
+        // random ActionPri
+        int randomIndex = m_rndGenerator.nextInt(priList.size());
+        return priList.get(randomIndex).getiAction();
     }
 
+    class ActionPri {
+        double dActionValue;
+        int iAction;
 
-    private void calculatePri(int iNum, double[][] adQFunction, BeliefState initBs, ) {
-        int iStartState = 0, iEndState = 0;
-        double dMaxR = m_pPOMDP.getMaxR() / (1 - m_pPOMDP.getDiscountFactor());
-
-        double dMaxDiff = Double.POSITIVE_INFINITY;
-        int iIteration = 0;
-
-        for (iStartState = 0; iStartState < m_pPOMDP.getStateCount(); iStartState++) {
-            double dActionValue = 0.0;
-            double[] adNextAction = new double[m_pPOMDP.getActionCount()];
-            Iterator<Entry<Integer, Double>> it = m_pPOMDP.getNonZeroTransitions(iStartState, iNum);
-            while (it.hasNext()) {
-                Entry<Integer, Double> e = it.next();
-                iEndState = e.getKey();
-                double dTr = e.getValue();
-//                double dO = m_pPOMDP.O(iNum, iEndState, iObservation);
-                for (int iNextAction = 0; iNextAction < m_pPOMDP.getActionCount(); iNextAction++) {
-                    adNextAction[iNextAction] += dO * dTr * adQFunction[iEndState][iNextAction];
-                }
-            }
-
-            double dBestNextAction = Double.NEGATIVE_INFINITY;
-            for (int iNextAction = 0; iNextAction < m_pPOMDP.getActionCount(); iNextAction++) {
-                if (adNextAction[iNextAction] > dBestNextAction)
-                    dBestNextAction = adNextAction[iNextAction];
-                dActionValue += dBestNextAction;
-            }
-            double dNewActionValue = dActionValue * m_pPOMDP.getDiscountFactor() + m_pPOMDP.R(iStartState, iNum);
-            double dDiff = Math.abs(adQFunction[iStartState][iNum] - dNewActionValue);
-            if (dDiff > dMaxDiff)
-                dMaxDiff = dDiff;
-            adQFunction[iStartState][iNum] = dNewActionValue;
+        public ActionPri(double dActionValue, int iAction) {
+            this.dActionValue = dActionValue;
+            this.iAction = iAction;
         }
+
+        public double getdActionValue() {
+            return dActionValue;
+        }
+
+        public void setdActionValue(double dActionValue) {
+            this.dActionValue = dActionValue;
+        }
+
+        public int getiAction() {
+            return iAction;
+        }
+
+        public void setiAction(int iAction) {
+            this.iAction = iAction;
+        }
+    }
+
+    private ActionPri calculatePri(int iNum, BeliefState initBs) {
+        double dActionValue = 0.0;
+        BeliefState bsCurrent = initBs, bsNext;
+//        for (iStartState = 0; iStartState < m_pPOMDP.getStateCount(); iStartState++) {
+        for (int iObservation = 0; iObservation < m_pPOMDP.getObservationCount(); iObservation++) {
+            if (bsCurrent != null) {
+                dActionValue += bsCurrent.getApproximateValue();
+                bsNext = bsCurrent.nextBeliefState(iNum, iObservation);
+                bsCurrent = bsNext;
+            }
+
+//            }
+        }
+        return new ActionPri(dActionValue, iNum);
     }
 
     public double getValue(int iState) {

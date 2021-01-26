@@ -17,7 +17,10 @@ import pomdp.valuefunction.JigSawValueFunction;
 import pomdp.valuefunction.LinearValueFunctionApproximation;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map.Entry;
 import java.util.SortedMap;
 import java.util.TreeMap;
@@ -44,12 +47,11 @@ public class PForwardSearchValueIteration extends ValueIteration {
     protected boolean m_bRandomizedActions;
     protected double m_dFilteredADR = 0.0;
     protected JigSawValueFunction m_vfUpperBound;
-
     double gamma = 0.95;  //折扣因子
     protected int maxIterations = 500;  //规定最多迭代次数
     protected int iterations = 0; //当前迭代次数
     protected double minWidth = Double.MAX_VALUE; //本次迭代上下界的最小差值
-    protected double threshold = 0.0; //裁剪信念点的增加阈值
+    protected double threshold = 0.05; //裁剪信念点的增加阈值
     public static final double EPSILON = 0.5;
     protected double SumDelta = 0.0;
     protected double dDelta = 1.0;
@@ -267,15 +269,18 @@ public class PForwardSearchValueIteration extends ValueIteration {
             Logger.getInstance().logln("Ended at depth " + iDepth + ". isTerminalState(" + iState + ")=" + isTerminalState(iState));
         } else {
 //            iHeuristicAction = getAction(iState, bsCurrent);
-            iHeuristicAction = getAction(iState, initBs);
+            iHeuristicAction = getAction(iState, bsCurrent);
 
             iNextState = selectNextState(iState, iHeuristicAction);
-            iObservation = getObservation(iState, iHeuristicAction, iNextState);
-            bsNext = bsCurrent.nextBeliefState(iHeuristicAction, iObservation);
-            if (iObservation > 1) {
+            List<Integer> iObservations = getObservationForPFSVI(iState, iHeuristicAction, iNextState);
+            if (iObservations.size() < 1) {
+                return 0.0;
+            }
+            for (Integer iO : iObservations) {
+                bsNext = bsCurrent.nextBeliefState(iHeuristicAction, iO);
                 vBeliefPoints.add(bsNext);
             }
-
+            expandPBVI(vBeliefPoints);
             if (bsNext == null || bsNext.equals(bsCurrent)) {
                 m_iDepth = iDepth;
             } else {
@@ -375,6 +380,13 @@ public class PForwardSearchValueIteration extends ValueIteration {
         return -1;
     }
 
+    private List<Integer> getObservationForPFSVI(int iStartState, int iAction, int iEndState) {
+        if (m_htType == HeuristicType.MDP) {
+            return m_pPOMDP.observeForPFSVI(iAction, iEndState, threshold);
+        }
+        return Collections.singletonList(-1);
+    }
+
     private int selectNextState(int iState, int iAction) {
         if (m_htType == HeuristicType.MDP) {
             return m_pPOMDP.execute(iAction, iState);
@@ -447,7 +459,6 @@ public class PForwardSearchValueIteration extends ValueIteration {
         m_aiStartStates[iMaxValueState] = -1;
         return iState;
     }
-
 
 
     protected double improveValueFunction() {

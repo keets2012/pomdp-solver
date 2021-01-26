@@ -689,7 +689,7 @@ public class MDPValueFunction extends PolicyStrategy {
         return iMaxAction;
     }
 
-    public int getPriAction(int iState, BeliefState initBs) {
+    public int getPriAction(int iState, BeliefState currentBs) {
         int iAction = 0, iMaxAction = 0;
         double dMaxQValue = Double.MAX_VALUE * -1, dQValue = 0.0;
 
@@ -710,7 +710,7 @@ public class MDPValueFunction extends PolicyStrategy {
                 dQValue = getQValue(iState, iAction);
                 if (dQValue == dMaxQValue) {
                     iMaxAction = iAction;
-                    priList.add(calculatePri(iAction, initBs));
+                    priList.add(calculatePri(iAction, currentBs));
                 }
             }
         } else {
@@ -749,20 +749,20 @@ public class MDPValueFunction extends PolicyStrategy {
         }
     }
 
-    private ActionPri calculatePri(int iNum, BeliefState initBs) {
+    private ActionPri calculatePri(int iNum, BeliefState currentBs) {
         double dActionValue = 0.0;
-        BeliefState bsCurrent = initBs, bsNext;
+        BeliefState bsCurrent = currentBs, bsNext;
 //        for (iStartState = 0; iStartState < m_pPOMDP.getStateCount(); iStartState++) {
-        for (int iObservation = 0; iObservation < m_pPOMDP.getObservationCount(); iObservation++) {
-            if (bsCurrent != null) {
-                dActionValue += bsCurrent.getApproximateValue();
-                bsNext = bsCurrent.nextBeliefState(iNum, iObservation);
-                bsCurrent = bsNext;
-            }
-
+//        for (int iObservation = 0; iObservation < m_pPOMDP.getObservationCount(); iObservation++) {
+//            if (bsCurrent != null) {
+//                dActionValue += bsCurrent.getApproximateValue();
+//                bsNext = bsCurrent.nextBeliefState(iNum, iObservation);
+//                bsCurrent = bsNext;
 //            }
-        }
-        return new ActionPri(dActionValue, iNum);
+//
+////            }
+//        }
+        return new ActionPri(bsCurrent.getApproximateValue(), iNum);
     }
 
     public double getValue(int iState) {

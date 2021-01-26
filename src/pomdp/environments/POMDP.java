@@ -569,6 +569,30 @@ public class POMDP implements Serializable {
         return iObservation;
     }
 
+    public List<Integer> observeForPFSVI(int iAction, int iState, double threshold) {
+        int iObservation = -1;
+        List<Integer> res = new ArrayList<>();
+        double dProb = m_rndGenerator.nextDouble(), dO = 0.0;
+        Iterator<Entry<Integer, Double>> itNonZeroObservations = m_fObservation
+                .getNonZeroEntries(iAction, iState);
+        Entry<Integer, Double> e = null;
+        while (itNonZeroObservations.hasNext()) {
+            e = itNonZeroObservations.next();
+            iObservation = e.getKey();
+            dO = e.getValue();
+            if (dO > threshold) {
+                res.add(iObservation);
+            }
+            dProb -= dO;
+        }
+        // assert iObservation >= 0 && iObservation < m_cObservations;
+        if (iObservation == m_cObservations)
+            throw new Error("Corrupted observation function - O( "
+                    + getActionName(iAction) + ", " + getStateName(iState)
+                    + ", * ) = 0");
+        return res;
+    }
+
     public int observe(BeliefState bs, int iAction) {
         int iObservation = -1;
         double dProb = m_rndGenerator.nextDouble(), dO = 0.0;

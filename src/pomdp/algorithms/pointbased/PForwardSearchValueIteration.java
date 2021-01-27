@@ -271,18 +271,19 @@ public class PForwardSearchValueIteration extends ValueIteration {
 //            iHeuristicAction = getAction(iState, bsCurrent);
             iHeuristicAction = getAction(iState, bsCurrent);
 
-            iNextState = selectNextState(iState, iHeuristicAction);
+            iNextState = selectNextStateForPFSVI(iState, iHeuristicAction, bsCurrent);
             List<Integer> iObservations = getObservationForPFSVI(iState, iHeuristicAction, iNextState);
             if (iObservations.size() < 1) {
-                return 0.0;
-            }
-            for (Integer iO : iObservations) {
-                bsNext = bsCurrent.nextBeliefState(iHeuristicAction, iO);
-                vBeliefPoints.add(bsNext);
-            }
+                m_iDepth = iDepth;
+            } else {
+                for (Integer iO : iObservations) {
+                    bsNext = bsCurrent.nextBeliefState(iHeuristicAction, iO);
+                    vBeliefPoints.add(bsNext);
+                }
 //            expandPBVI(vBeliefPoints);
-            //计算最远的后继
-            bsNext = m_pPOMDP.getBeliefStateFactory().computeLimitedFarthestSuccessor(vBeliefPoints, bsCurrent, iterations, m_vfUpperBound, m_vValueFunction, m_dEpsilon, gamma, threshold);
+                //计算最远的后继
+                bsNext = m_pPOMDP.getBeliefStateFactory().computeLimitedFarthestSuccessor(vBeliefPoints, bsCurrent, iterations, m_vfUpperBound, m_vValueFunction, m_dEpsilon, gamma, threshold);
+            }
 
             if (bsNext == null || bsNext.equals(bsCurrent)) {
                 m_iDepth = iDepth;
@@ -393,6 +394,17 @@ public class PForwardSearchValueIteration extends ValueIteration {
     private int selectNextState(int iState, int iAction) {
         if (m_htType == HeuristicType.MDP) {
             return m_pPOMDP.execute(iAction, iState);
+        } else if (m_htType == HeuristicType.HeuristicPolicy) {
+            int iNextState = m_hpPolicy.getNextState(iState, iAction);
+            if (iNextState == -1)
+                return m_pPOMDP.execute(iAction, iState);
+        }
+        return -1;
+    }
+
+    private int selectNextStateForPFSVI(int iState, int iAction, BeliefState currentBs) {
+        if (m_htType == HeuristicType.MDP) {
+            return m_pPOMDP.execute(iAction, iState, currentBs);
         } else if (m_htType == HeuristicType.HeuristicPolicy) {
             int iNextState = m_hpPolicy.getNextState(iState, iAction);
             if (iNextState == -1)

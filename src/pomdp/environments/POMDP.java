@@ -482,7 +482,7 @@ public class POMDP implements Serializable {
         return iNextState;
     }
 
-    public int execute(int iAction, int iState, BeliefState initBs) {
+    public int execute(int iAction, int iState, BeliefState currentBs) {
         int iNextState = -1;
         double dProb = m_rndGenerator.nextDouble();
         double dTr = 0.0;
@@ -491,7 +491,7 @@ public class POMDP implements Serializable {
                 iState, iAction);
         Entry<Integer, Double> e = null;
         while (itNonZero.hasNext()) {
-            priList.add(calculatePri(iAction, e, initBs));
+            priList.add(calculatePri(iAction, e, currentBs));
             e = itNonZero.next();
             iNextState = e.getKey();
             dTr = e.getValue();
@@ -528,16 +528,16 @@ public class POMDP implements Serializable {
         }
     }
 
-    private NextStatePri calculatePri(int iNum, Entry<Integer, Double> e, BeliefState initBs) {
-        double dValue = 0.0;
-        BeliefState bsCurrent = initBs, bsNext;
+    private NextStatePri calculatePri(int iNum, Entry<Integer, Double> e, BeliefState currentBs) {
+        double dValue = currentBs.getApproximateValue();
+        BeliefState bsCurrent = currentBs, bsNext;
 //        for (int iStartState = 0; iStartState < this.getStateCount(); iStartState++) {
-        for (int iObservation = 0; iObservation < this.getObservationCount(); iObservation++) {
-
-            dValue = e.getValue() * bsCurrent.getApproximateValue();
-            bsNext = bsCurrent.nextBeliefState(iNum, iObservation);
-            bsCurrent = bsNext;
-        }
+//        for (int iObservation = 0; iObservation < this.getObservationCount(); iObservation++) {
+//
+//            dValue = e.getValue() * bsCurrent.getApproximateValue();
+//            bsNext = bsCurrent.nextBeliefState(iNum, iObservation);
+//            bsCurrent = bsNext;
+//        }
 //        }
         return new NextStatePri(dValue, e.getKey());
     }

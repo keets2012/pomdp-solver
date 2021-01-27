@@ -280,7 +280,10 @@ public class PForwardSearchValueIteration extends ValueIteration {
                 bsNext = bsCurrent.nextBeliefState(iHeuristicAction, iO);
                 vBeliefPoints.add(bsNext);
             }
-            expandPBVI(vBeliefPoints);
+//            expandPBVI(vBeliefPoints);
+            //计算最远的后继
+            bsNext = m_pPOMDP.getBeliefStateFactory().computeLimitedFarthestSuccessor(vBeliefPoints, bsCurrent, iterations, m_vfUpperBound, m_vValueFunction, m_dEpsilon, gamma, threshold);
+
             if (bsNext == null || bsNext.equals(bsCurrent)) {
                 m_iDepth = iDepth;
             } else {
@@ -345,7 +348,7 @@ public class PForwardSearchValueIteration extends ValueIteration {
         }
         //设置回原来的值，是否要缓存b
         m_pPOMDP.getBeliefStateFactory().cacheBeliefStates(bPrevious);
-
+//        vExpanded.g
         return vExpanded;
     }
 
